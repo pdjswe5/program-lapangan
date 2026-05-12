@@ -1,70 +1,64 @@
 // Pelanggan (Customer) module — dashboard + 4 sub-screens + modals
 
 const PELANGGAN = [
-  { name:'Budi Susanto Cahyono Siner', code:'b7364', alamat:'',          kota:'',         tel:'',          pemilik:'',                   nik:'',          email:'',                   kontak:'',       flag:null },
-  { name:'Brandon Fononta 3',          code:'C001',  alamat:'Blok M',    kota:'JKT',      tel:'5555',      pemilik:'Eddy',               nik:'12345',     email:'brandon@pdj.com',    kontak:'Brandon',flag:null },
-  { name:'Charlie Reynold 2',          code:'C012',  alamat:'Blok M',    kota:'JKT',      tel:'5555',      pemilik:'Alex',               nik:'12345',     email:'brandon@pdj.com',    kontak:'Brandon',flag:null },
-  { name:'gagagaga',                   code:'g123',  alamat:'',          kota:'',         tel:'',          pemilik:'didi',               nik:'12345682832',email:'wildann@example.com', kontak:'09089876655', flag:null },
-  { name:'Pelanggan 1',                code:'H01',   alamat:'',          kota:'',         tel:'',          pemilik:'',                   nik:'',          email:'',                   kontak:'',       flag:null },
-  { name:'KAVI',                       code:'KV001', alamat:'',          kota:'',         tel:'',          pemilik:'asdfas',             nik:'',          email:'',                   kontak:'',       flag:null },
-  { name:'Lia Malik',                  code:'L001',  alamat:'Blok M',    kota:'JKT',      tel:'9725',      pemilik:'Alex',               nik:'12345',     email:'brandon@pdj.com',    kontak:'Brandon',flag:null },
-  { name:'Lanny Wijaya',               code:'L002',  alamat:'Blok M',    kota:'JKT',      tel:'5555',      pemilik:'Alex',               nik:'12345',     email:'brandon@pdj.com',    kontak:'Brandon',flag:null },
-  { name:'Lusista Wijaya 2',           code:'L015',  alamat:'Blok M',    kota:'JKT',      tel:'5555',      pemilik:'Alex',               nik:'12345',     email:'brandon@pdj.com',    kontak:'Brandon',flag:null },
-  { name:'Lusiska',                    code:'L0151', alamat:'Blok M',    kota:'JKT',      tel:'5555',      pemilik:'Alex',               nik:'12345',     email:'brandon@pdj.com',    kontak:'Brandon',flag:null },
-  { name:'Pelanggan 40000000',         code:'p12345',alamat:'',          kota:'',         tel:'',          pemilik:'Khalid',             nik:'2135678910',email:'jayasadiq@gmail.com',kontak:'09089876655', flag:null },
-  { name:'INDOMILK 2',                 code:'P105',  alamat:'Jl.Mutiara',kota:'Sampang',  tel:'00872',     pemilik:'Affan Maulana Zulkamain', nik:'',     email:'',                   kontak:'Kosong Bro', flag:null },
-  { name:'PELANGGAN H',                code:'P34567',alamat:'JL KEDUNG BARUK NO 588S', kota:'SURABAYA', tel:'08145678967', pemilik:'David', nik:'', email:'davidcompany@gmail.com', kontak:'08145678967', flag:null },
-  { name:'PELANGGAN I',                code:'P86432',alamat:'JL GRESIKAN NO 20000',    kota:'SURABAYA', tel:'08506789009', pemilik:'Siti',  nik:'', email:'siticompany@gmail.com',  kontak:'08145678967', flag:null },
-  { name:'PELANGGAN BARU',             code:'PRB01', alamat:'JAI AN JAI AN NO 1234',   kota:'SURABAYA', tel:'08312345678', pemilik:'NISA',  nik:'1234567890', email:'nisa@gmail.com', kontak:'08765654321', flag:null },
-  { name:'Pelanggan 3',                code:'PLG03', alamat:'Jl.Pattimura no 123',     kota:'malang',   tel:'089623653463/8123…', pemilik:'Mans', nik:'12345678910', email:'pelanggan3@pdj.com', kontak:'08912345657', flag:'pink' },
-  { name:'Perusahaan 7',               code:'PT07',  alamat:'jl mawar no 12345',       kota:'Jakarta',  tel:'08123456578', pemilik:'Kiki', nik:'12345789', email:'perusahaan7@gmail.com', kontak:'08712345672', flag:'pink' },
-  { name:'Reynold',                    code:'R003',  alamat:'Blok M',    kota:'JKT',      tel:'5555',      pemilik:'Alex',               nik:'12345',     email:'brandon@pdj.com',    kontak:'Brandon',flag:null },
-  { name:'Reynold',                    code:'R006',  alamat:'Blok M',    kota:'JKT',      tel:'5555',      pemilik:'Alex',               nik:'12345',     email:'brandon@pdj.com',    kontak:'Brandon',flag:null },
-  { name:'Reynold Pratama',            code:'R009',  alamat:'Blok M',    kota:'JKT',      tel:'5555',      pemilik:'Alex',               nik:'12345',     email:'brandon@pdj.com',    kontak:'Brandon',flag:null },
-  { name:'Sari Mart',                  code:'S101',  alamat:'Jl. Kenanga 22', kota:'Jakarta', tel:'02199887766', pemilik:'Sari Dewi',     nik:'3174012345', email:'sarimart@gmail.com', kontak:'08123456789', flag:null },
-  { name:'Toko Jaya Abadi',            code:'T201',  alamat:'Jl. Sudirman 45', kota:'Bandung', tel:'02288776655', pemilik:'Joko Susilo',    nik:'3273098765', email:'jayaabadi@gmail.com',kontak:'08198765432', flag:null },
+  { name:'Andika Firmansyah',      code:'C001', alamat:'Jl. Raya Gubeng No. 12',     kota:'Surabaya', tel:'0812-3001-014', pemilik:'Andika',     nik:'3578011201900001', email:'andika.firmansyah@gmail.com',   kontak:'0812-3001-014', flag:null },
+  { name:'Lisa Halim',             code:'C002', alamat:'Jl. Dharmahusada No. 5',     kota:'Surabaya', tel:'0812-3001-007', pemilik:'Lisa',        nik:'3578014504980002', email:'lisa.halim@gmail.com',          kontak:'0812-3001-007', flag:null },
+  { name:'Kevin Sanjaya',          code:'C003', alamat:'Jl. Diponegoro No. 88',      kota:'Surabaya', tel:'0812-3001-006', pemilik:'Kevin',       nik:'3578012008990003', email:'kevin.sanjaya@email.com',       kontak:'0812-3001-006', flag:'pink' },
+  { name:'Reza Permana',           code:'C004', alamat:'Jl. Mulyosari No. 34',       kota:'Surabaya', tel:'0812-3001-001', pemilik:'Reza',        nik:'3578011905950004', email:'reza.permana@gmail.com',        kontak:'0812-3001-001', flag:null },
+  { name:'Diana Putri',            code:'C005', alamat:'Jl. Kertajaya Indah No. 9',  kota:'Surabaya', tel:'0812-3001-003', pemilik:'Diana',       nik:'3578016206010005', email:'diana.putri@gmail.com',         kontak:'0812-3001-003', flag:null },
+  { name:'Bima Sakti',             code:'C006', alamat:'Jl. Ahmad Yani No. 200',     kota:'Surabaya', tel:'0812-3001-002', pemilik:'Bima',        nik:'3578010307980006', email:'bima.sakti@gmail.com',          kontak:'0812-3001-002', flag:null },
+  { name:'Gita Permadi',           code:'C007', alamat:'Jl. Rungkut Industri No. 7', kota:'Surabaya', tel:'0812-3001-009', pemilik:'Gita',        nik:'3578012102000007', email:'gita.permadi@gmail.com',        kontak:'0812-3001-009', flag:null },
+  { name:'Stevani Lee',            code:'C008', alamat:'Jl. Pakuwon City Blok B2',   kota:'Surabaya', tel:'0812-3001-012', pemilik:'Stevani',     nik:'3578015506030008', email:'stevani.lee@gmail.com',         kontak:'0812-3001-012', flag:'pink' },
+  { name:'Andre Taulany',          code:'C009', alamat:'Jl. Manyar Kertoadi No. 3',  kota:'Surabaya', tel:'0812-3001-010', pemilik:'Andre',       nik:'3578011201880009', email:'andre.taulany@gmail.com',       kontak:'0812-3001-010', flag:null },
+  { name:'FC Bintang Jaya',        code:'T001', alamat:'Jl. Semolowaru No. 15',      kota:'Surabaya', tel:'0821-9001-001', pemilik:'Coach Agus',  nik:'',                 email:'fcbintangjaya@gmail.com',       kontak:'0821-9001-001', flag:null },
+  { name:'Komunitas Futsal SBY',   code:'T002', alamat:'Jl. Ngagel Jaya No. 22',     kota:'Surabaya', tel:'0812-3001-005', pemilik:'Pak Rizal',   nik:'',                 email:'komunitas.futsal@gmail.com',    kontak:'0812-3001-005', flag:null },
+  { name:'Tim Matahari FC',        code:'T003', alamat:'Jl. Ketintang No. 77',       kota:'Surabaya', tel:'0812-3001-004', pemilik:'Coach Hendra',nik:'',                 email:'timmataharifc@gmail.com',       kontak:'0812-3001-004', flag:null },
+  { name:'Komunitas Sehat',        code:'T004', alamat:'Jl. Wonokromo No. 50',       kota:'Surabaya', tel:'0812-3001-013', pemilik:'Bu Retno',    nik:'',                 email:'komunitassehat@gmail.com',      kontak:'0812-3001-013', flag:null },
+  { name:'Tim Garuda Muda',        code:'T005', alamat:'Jl. Kendangsari No. 18',     kota:'Surabaya', tel:'0812-3001-015', pemilik:'Pak Wahyu',   nik:'',                 email:'timolahraga.garuda@gmail.com',  kontak:'0812-3001-015', flag:null },
+  { name:'Juventus FC Indo',       code:'T006', alamat:'Jl. Dukuh Kupang No. 101',   kota:'Surabaya', tel:'0812-3001-011', pemilik:'Pak Doni',    nik:'',                 email:'juventusindofutsal@gmail.com',  kontak:'0812-3001-011', flag:null },
+  { name:'Akademi Padel Surabaya', code:'T007', alamat:'Jl. Darmo No. 45',           kota:'Surabaya', tel:'0878-5001-001', pemilik:'Coach Ferdi', nik:'',                 email:'akademipadel.sby@gmail.com',    kontak:'0878-5001-001', flag:'pink' },
+  { name:'Club Padel Eastside',    code:'T008', alamat:'Jl. Galaxy Bumi Permai B7',  kota:'Surabaya', tel:'0878-5001-002', pemilik:'Ivan Halim',  nik:'',                 email:'padel.eastside@gmail.com',      kontak:'0878-5001-002', flag:null },
+  { name:'Nisa Ramadhani',         code:'C010', alamat:'Jl. Keputih Tegal No. 12',   kota:'Surabaya', tel:'0857-0010-001', pemilik:'Nisa',        nik:'3578014807020010', email:'nisa.ramadhani@gmail.com',      kontak:'0857-0010-001', flag:null },
+  { name:'Fauzan Hakim',           code:'C011', alamat:'Jl. Kalibokor No. 33',       kota:'Surabaya', tel:'0857-0010-002', pemilik:'Fauzan',      nik:'3578011502990011', email:'fauzan.hakim@gmail.com',        kontak:'0857-0010-002', flag:null },
+  { name:'Toko Sport Arena',       code:'S001', alamat:'Jl. Pemuda No. 20',          kota:'Surabaya', tel:'031-5678-9000',  pemilik:'Pak Arief',   nik:'',                 email:'toko.sportarena@gmail.com',     kontak:'0812-8001-001', flag:null },
 ];
 
 const ORDER_PENJUALAN = [
-  { tgl:'30-04-2026', no:'OP-2026-0142', pelanggan:'PELANGGAN BARU',  ref:'REF-001', sales:'Sales Baru 2', top:14, due:'14-05-2026', items:5, total:  18450000, status:'Approved'  },
-  { tgl:'30-04-2026', no:'OP-2026-0141', pelanggan:'Sari Mart',       ref:'REF-002', sales:'Sales Baru 2', top: 7, due:'07-05-2026', items:3, total:   4250000, status:'Pending'   },
-  { tgl:'29-04-2026', no:'OP-2026-0140', pelanggan:'Toko Jaya Abadi', ref:'REF-003', sales:'Sales Senior', top:30, due:'29-05-2026', items:8, total:  32100000, status:'Realisasi' },
-  { tgl:'29-04-2026', no:'OP-2026-0139', pelanggan:'PELANGGAN H',     ref:'REF-004', sales:'Sales Baru 2', top:14, due:'13-05-2026', items:2, total:   2840000, status:'Draft'     },
-  { tgl:'28-04-2026', no:'OP-2026-0138', pelanggan:'INDOMILK 2',      ref:'REF-005', sales:'Sales Senior', top:30, due:'28-05-2026', items:6, total:  21500000, status:'Approved'  },
-  { tgl:'27-04-2026', no:'OP-2026-0137', pelanggan:'Pelanggan 3',     ref:'REF-006', sales:'Sales Baru 2', top: 7, due:'04-05-2026', items:4, total:   8920000, status:'Realisasi' },
-  { tgl:'26-04-2026', no:'OP-2026-0136', pelanggan:'PELANGGAN I',     ref:'REF-007', sales:'Sales Senior', top:14, due:'10-05-2026', items:3, total:   5670000, status:'Approved'  },
-  { tgl:'25-04-2026', no:'OP-2026-0135', pelanggan:'Lia Malik',       ref:'REF-008', sales:'Sales Baru 2', top: 0, due:'25-04-2026', items:2, total:   1240000, status:'Realisasi' },
+  { tgl:'12-05-2026', no:'OP-2026-0158', pelanggan:'Toko Sport Arena',        divisi:'Futsal',      ref:'BO-2026-0042', sales:'Sales Senior', top: 7, due:'19-05-2026', items:8, total: 2150000, status:'Approved'  },
+  { tgl:'12-05-2026', no:'OP-2026-0157', pelanggan:'Akademi Padel Surabaya',  divisi:'Padel',       ref:'BO-2026-0041', sales:'Sales Baru 2', top: 0, due:'12-05-2026', items:5, total:  850000, status:'Pending'   },
+  { tgl:'11-05-2026', no:'OP-2026-0156', pelanggan:'FC Bintang Jaya',         divisi:'Futsal',      ref:'BO-2026-0040', sales:'Sales Senior', top:14, due:'25-05-2026', items:3, total:  450000, status:'Realisasi' },
+  { tgl:'11-05-2026', no:'OP-2026-0155', pelanggan:'Reza Permana',            divisi:'Padel',       ref:'BO-2026-0039', sales:'Sales Baru 2', top: 0, due:'11-05-2026', items:4, total:  620000, status:'Realisasi' },
+  { tgl:'10-05-2026', no:'OP-2026-0154', pelanggan:'Tim Matahari FC',         divisi:'Mini Soccer', ref:'BO-2026-0038', sales:'Sales Senior', top:14, due:'24-05-2026', items:6, total: 1200000, status:'Approved'  },
+  { tgl:'10-05-2026', no:'OP-2026-0153', pelanggan:'Club Padel Eastside',     divisi:'Padel',       ref:'BO-2026-0037', sales:'Sales Baru 2', top: 7, due:'17-05-2026', items:3, total:  380000, status:'Draft'     },
+  { tgl:'09-05-2026', no:'OP-2026-0152', pelanggan:'Kevin Sanjaya',           divisi:'Padel',       ref:'BO-2026-0036', sales:'Sales Senior', top: 0, due:'09-05-2026', items:2, total:  250000, status:'Realisasi' },
+  { tgl:'09-05-2026', no:'OP-2026-0151', pelanggan:'Komunitas Futsal SBY',    divisi:'Futsal',      ref:'BO-2026-0035', sales:'Sales Baru 2', top:14, due:'23-05-2026', items:4, total:  690000, status:'Approved'  },
+  { tgl:'08-05-2026', no:'OP-2026-0150', pelanggan:'Tim Garuda Muda',         divisi:'Mini Soccer', ref:'BO-2026-0034', sales:'Sales Senior', top: 7, due:'15-05-2026', items:5, total:  950000, status:'Realisasi' },
+  { tgl:'08-05-2026', no:'OP-2026-0149', pelanggan:'Diana Putri',             divisi:'Padel',       ref:'BO-2026-0033', sales:'Sales Baru 2', top: 0, due:'08-05-2026', items:2, total:  200000, status:'Realisasi' },
 ];
 
 const NOTA_PENJUALAN = [
-  { tgl:'30-04-2026', no:'NJ-2026-0231', pelanggan:'Sari Mart',       refSO:'OP-2026-0141', gudang:'Gudang Konjoran', sales:'Sales Baru 2', total:  4675000, status:'Lunas'    },
-  { tgl:'30-04-2026', no:'NJ-2026-0230', pelanggan:'Toko Jaya Abadi', refSO:'OP-2026-0140', gudang:'Gudang Konjoran', sales:'Sales Senior', total: 35311000, status:'Outstanding' },
-  { tgl:'29-04-2026', no:'NJ-2026-0229', pelanggan:'INDOMILK 2',      refSO:'OP-2026-0138', gudang:'Gudang Utama',    sales:'Sales Senior', total: 23665000, status:'Outstanding' },
-  { tgl:'28-04-2026', no:'NJ-2026-0228', pelanggan:'Pelanggan 3',     refSO:'OP-2026-0137', gudang:'Gudang Konjoran', sales:'Sales Baru 2', total:  9812000, status:'Lunas'    },
-  { tgl:'27-04-2026', no:'NJ-2026-0227', pelanggan:'PELANGGAN I',     refSO:'OP-2026-0136', gudang:'Gudang Utama',    sales:'Sales Senior', total:  6237000, status:'Lunas'    },
-  { tgl:'26-04-2026', no:'NJ-2026-0226', pelanggan:'Lia Malik',       refSO:'OP-2026-0135', gudang:'Gudang Konjoran', sales:'Sales Baru 2', total:  1364000, status:'Lunas'    },
-  { tgl:'25-04-2026', no:'NJ-2026-0225', pelanggan:'PELANGGAN BARU',  refSO:'-',            gudang:'Gudang Konjoran', sales:'Sales Baru 2', total:  3450000, status:'Outstanding' },
+  { tgl:'12-05-2026', no:'NJ-2026-0248', pelanggan:'Toko Sport Arena',        refSO:'OP-2026-0158', gudang:'Gudang Utama',          sales:'Sales Senior', total: 2365000, status:'Outstanding' },
+  { tgl:'12-05-2026', no:'NJ-2026-0247', pelanggan:'Reza Permana',            refSO:'OP-2026-0155', gudang:'Gudang Mini Bar Padel',  sales:'Sales Baru 2', total:  682000, status:'Lunas'       },
+  { tgl:'11-05-2026', no:'NJ-2026-0246', pelanggan:'FC Bintang Jaya',         refSO:'OP-2026-0156', gudang:'Gudang Kantin Arena',   sales:'Sales Senior', total:  495000, status:'Lunas'       },
+  { tgl:'11-05-2026', no:'NJ-2026-0245', pelanggan:'Tim Matahari FC',         refSO:'OP-2026-0154', gudang:'Gudang Perlengkapan',   sales:'Sales Senior', total: 1320000, status:'Outstanding' },
+  { tgl:'10-05-2026', no:'NJ-2026-0244', pelanggan:'Akademi Padel Surabaya',  refSO:'OP-2026-0157', gudang:'Gudang Mini Bar Padel',  sales:'Sales Baru 2', total:  935000, status:'Outstanding' },
+  { tgl:'09-05-2026', no:'NJ-2026-0243', pelanggan:'Kevin Sanjaya',           refSO:'OP-2026-0152', gudang:'Gudang Mini Bar Padel',  sales:'Sales Senior', total:  275000, status:'Lunas'       },
+  { tgl:'09-05-2026', no:'NJ-2026-0242', pelanggan:'Komunitas Futsal SBY',    refSO:'OP-2026-0151', gudang:'Gudang Kantin Arena',   sales:'Sales Baru 2', total:  759000, status:'Lunas'       },
+  { tgl:'08-05-2026', no:'NJ-2026-0241', pelanggan:'Tim Garuda Muda',         refSO:'OP-2026-0150', gudang:'Gudang Perlengkapan',   sales:'Sales Senior', total: 1045000, status:'Outstanding' },
+  { tgl:'08-05-2026', no:'NJ-2026-0240', pelanggan:'Diana Putri',             refSO:'OP-2026-0149', gudang:'Gudang Mini Bar Padel',  sales:'Sales Baru 2', total:  220000, status:'Lunas'       },
 ];
 
-const RETUR_PENJUALAN = [
-  { tgl:'30-04-2026', no:'RJ-2026-0021', pelanggan:'Toko Jaya Abadi', refNota:'NJ-2026-0230', gudang:'Gudang Konjoran', items:1, total: 1180000, alasan:'Cacat produksi',     status:'Approved' },
-  { tgl:'29-04-2026', no:'RJ-2026-0020', pelanggan:'INDOMILK 2',      refNota:'NJ-2026-0229', gudang:'Gudang Utama',    items:2, total: 2360000, alasan:'Salah kirim varian', status:'Pending'  },
-  { tgl:'28-04-2026', no:'RJ-2026-0019', pelanggan:'Sari Mart',       refNota:'NJ-2026-0231', gudang:'Gudang Konjoran', items:1, total:  142000, alasan:'Kemasan rusak',      status:'Approved' },
-  { tgl:'25-04-2026', no:'RJ-2026-0018', pelanggan:'Pelanggan 3',     refNota:'NJ-2026-0228', gudang:'Gudang Konjoran', items:1, total:  720000, alasan:'Tidak sesuai pesanan', status:'Approved' },
-  { tgl:'22-04-2026', no:'RJ-2026-0017', pelanggan:'PELANGGAN H',     refNota:'-',            gudang:'Gudang Utama',    items:3, total: 1890000, alasan:'Cacat produksi',     status:'Cancelled' },
-];
 
 const SALES_LIST = ['Sales Baru 2', 'Sales Senior', 'Sales Junior 1', 'Sales Junior 2'];
 const AKUN_TUNAI = ['Kas Besar — IDR', 'Bank BCA 8810-99', 'Bank Mandiri 1212', 'Kas Kecil Cabang'];
-const GUDANG_PJ = ['Gudang Konjoran', 'Gudang Utama', 'Gudang Pusat', 'Gudang Cabang Surabaya'];
+const GUDANG_PJ = ['Gudang Mini Bar Padel', 'Gudang Kantin Arena', 'Gudang Utama', 'Gudang Perlengkapan'];
 
-Object.assign(window, { PELANGGAN, ORDER_PENJUALAN, NOTA_PENJUALAN, RETUR_PENJUALAN, SALES_LIST, AKUN_TUNAI, GUDANG_PJ });
+Object.assign(window, { PELANGGAN, ORDER_PENJUALAN, NOTA_PENJUALAN, SALES_LIST, AKUN_TUNAI, GUDANG_PJ });
 
 const PJ_SUBS = [
   { id:'katalog', label:'Katalog Pelanggan' },
   { id:'order',   label:'Order Penjualan' },
   { id:'nota',    label:'Nota Penjualan' },
-  { id:'retur',   label:'Retur Penjualan' },
 ];
 
 function PjSubNav({ active, onChange }) {
@@ -84,14 +78,12 @@ function PelangganDashboard({ onOpenSub, onNavigate }) {
   const aktifPel = PELANGGAN.filter(p => p.email).length;
   const pendingOrd = ORDER_PENJUALAN.filter(o => o.status === 'Pending' || o.status === 'Draft').length;
   const outstanding = NOTA_PENJUALAN.filter(n => n.status === 'Outstanding').reduce((s,n) => s+n.total, 0);
-  const returPending = RETUR_PENJUALAN.filter(r => r.status === 'Pending').length;
   const omzet30 = NOTA_PENJUALAN.reduce((s,n)=>s+n.total, 0);
 
   const tiles = [
     { id:'katalog', icon:I.users(20),   title:'Katalog Pelanggan', desc:'Master data pelanggan, kontak, alamat, dan info perusahaan.', badge:`${totalPel} pelanggan`, count:`${aktifPel} aktif`, accent:null },
     { id:'order',   icon:I.cart(20),    title:'Order Penjualan',   desc:'Buat dan kelola order penjualan, approval, hingga realisasi.', badge: pendingOrd > 0 ? `${pendingOrd} perlu approval` : null, badgeKind:'pulse', accent:'#0d9488' },
     { id:'nota',    icon:I.invoice(20), title:'Nota Penjualan',    desc:'Penerbitan nota/invoice untuk pelanggan dan tracking pembayaran.', badge:`${NOTA_PENJUALAN.filter(n=>n.status==='Outstanding').length} outstanding`, accent:'#7c3aed' },
-    { id:'retur',   icon:I.refresh(20), title:'Retur Penjualan',   desc:'Catat retur barang dari pelanggan dan proses penggantian/refund.', badge: returPending > 0 ? `${returPending} pending` : null, badgeKind:'pulse', accent:'#b45309' },
   ];
 
   return (
@@ -104,7 +96,7 @@ function PelangganDashboard({ onOpenSub, onNavigate }) {
       <div className="page-head">
         <div>
           <h1>Jual Workspace</h1>
-          <div className="sub">Kelola penjualan, order, nota, dan retur produk & persewaan lapangan.</div>
+          <div className="sub">Kelola penjualan, order, dan nota produk & persewaan lapangan.</div>
         </div>
         <div style={{display:'flex', gap:8}}>
           <button className="btn btn-sm">{I.refresh()} Refresh</button>
@@ -129,9 +121,9 @@ function PelangganDashboard({ onOpenSub, onNavigate }) {
           <div className="delta down">{NOTA_PENJUALAN.filter(n=>n.status==='Outstanding').length} nota belum lunas</div>
         </div>
         <div className="kpi">
-          <div className="lbl">Order & Retur Aktif</div>
-          <div className="val mono">{ORDER_PENJUALAN.length + RETUR_PENJUALAN.length}</div>
-          <div className="delta">{pendingOrd + returPending} menunggu tindakan</div>
+          <div className="lbl">Order Aktif</div>
+          <div className="val mono">{ORDER_PENJUALAN.length}</div>
+          <div className="delta">{pendingOrd} menunggu tindakan</div>
         </div>
       </div>
 
@@ -407,7 +399,7 @@ function NotaPenjualan({ onAdd, onEdit }) {
                 <th>Tgl. Bukti</th>
                 <th>No. Nota</th>
                 <th>Pelanggan</th>
-                <th>Ref. SO</th>
+                <th>Ref. Booking</th>
                 <th>Gudang</th>
                 <th>Sales</th>
                 <th className="num">Total Rp</th>
@@ -432,70 +424,6 @@ function NotaPenjualan({ onAdd, onEdit }) {
                       <button className="btn btn-icon btn-sm" onClick={()=>onEdit(n)}>{I.edit()}</button>
                       <button className="btn btn-icon btn-sm">{I.print()}</button>
                       <button className="btn btn-icon btn-sm">{I.email()}</button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </>
-  );
-}
-
-// ─── 4. Retur Penjualan list ────────────────────────────────────────────────
-
-function ReturPenjualan({ onAdd, onEdit }) {
-  return (
-    <>
-      <PjHeader title="Retur Penjualan" sub={`${RETUR_PENJUALAN.length} retur · ${RETUR_PENJUALAN.filter(r=>r.status==='Pending').length} menunggu approval`} onAdd={onAdd} addLabel="Retur Baru" />
-      <div className="filter-bar">
-        <div className="filter-grid">
-          <div className="field"><label>Pencarian</label><div className="input-w-icon">{I.search(14)}<input className="input" placeholder="No. retur, pelanggan…"/></div></div>
-          <div className="field"><label>Pelanggan</label><select className="select"><option>Semua</option>{PELANGGAN.slice(0,12).map(p=><option key={p.code}>{p.name}</option>)}</select></div>
-          <div className="field"><label>Gudang</label><select className="select"><option>Semua</option>{GUDANG_PJ.map(g=><option key={g}>{g}</option>)}</select></div>
-          <div className="field"><label>Status</label><select className="select"><option>Semua</option><option>Pending</option><option>Approved</option><option>Cancelled</option></select></div>
-          <div className="filter-actions"><button className="btn">Reset</button><button className="btn btn-primary">{I.filter()} Cari</button></div>
-        </div>
-      </div>
-      <div className="table-card">
-        <div className="table-toolbar"><div className="table-toolbar-left"><b>{RETUR_PENJUALAN.length}</b> retur · Total {fmtRp(RETUR_PENJUALAN.reduce((s,r)=>s+r.total,0))}</div></div>
-        <div className="table-scroll">
-          <table className="data">
-            <thead>
-              <tr>
-                <th style={{width:38}}><input type="checkbox" className="cb"/></th>
-                <th>Tgl. Bukti</th>
-                <th>No. Retur</th>
-                <th>Pelanggan</th>
-                <th>Ref. Nota</th>
-                <th>Gudang</th>
-                <th className="num">Items</th>
-                <th className="num">Total Rp</th>
-                <th>Alasan</th>
-                <th>Status</th>
-                <th style={{width:100}}>Aksi</th>
-              </tr>
-            </thead>
-            <tbody>
-              {RETUR_PENJUALAN.map(r => (
-                <tr key={r.no} onClick={()=>onEdit(r)}>
-                  <td onClick={e=>e.stopPropagation()}><input type="checkbox" className="cb"/></td>
-                  <td className="mono">{r.tgl}</td>
-                  <td><span className="cell-link mono">{r.no}</span></td>
-                  <td>{r.pelanggan}</td>
-                  <td className="mono muted">{r.refNota}</td>
-                  <td>{r.gudang}</td>
-                  <td className="num mono">{r.items}</td>
-                  <td className="num mono">{fmtRp(r.total)}</td>
-                  <td className="muted">{r.alasan}</td>
-                  <td><span className={`pill ${r.status==='Approved'?'realisasi':r.status==='Pending'?'pending':'cancelled'}`}>{r.status}</span></td>
-                  <td onClick={e=>e.stopPropagation()}>
-                    <div className="row-actions">
-                      <button className="btn btn-icon btn-sm" onClick={()=>onEdit(r)}>{I.edit()}</button>
-                      <button className="btn btn-icon btn-sm">{I.print()}</button>
-                      <button className="btn btn-icon btn-sm del">{I.trash()}</button>
                     </div>
                   </td>
                 </tr>
@@ -816,7 +744,7 @@ function NotaModal({ data, onClose, onSave }) {
             <>
               <div className="form-row">
                 <div className="field"><label>Tgl. Bukti</label><input className="input" type="date" defaultValue="2026-04-30"/></div>
-                <div className="field"><label>No. SO</label><select className="select" defaultValue={data?.refSO || ''}><option value="">— Pilih SO —</option>{ORDER_PENJUALAN.map(o=><option key={o.no}>{o.no}</option>)}</select></div>
+                <div className="field"><label>No. BO</label><select className="select" defaultValue={data?.refSO || ''}><option value="">— Pilih Booking —</option>{ORDER_PENJUALAN.map(o=><option key={o.no}>{o.no}</option>)}</select></div>
               </div>
               <div className="form-row">
                 <div className="field"><label>Pelanggan *</label>
@@ -865,76 +793,6 @@ function NotaModal({ data, onClose, onSave }) {
   );
 }
 
-function ReturModal({ data, onClose, onSave }) {
-  const [itemTab, setItemTab] = React.useState('stock');
-  const [lines, setLines] = React.useState([]);
-  const [discPct, setDiscPct] = React.useState(0);
-  const [ppn, setPpn] = React.useState(0);
-  const [ppnMode, setPpnMode] = React.useState('Include');
-  const subtotal = lines.reduce((s,l) => {
-    const it = BARANG.find(b => b.name === l.item);
-    const harga = it?.price || it?.hpp || 0;
-    return s + (l.qty||0) * harga * (1 - (l.disc||0)/100);
-  }, 0);
-  const isEdit = !!data;
-
-  return (
-    <PjModalShell wide title={isEdit ? `Edit Retur — ${data.no}` : 'Retur Penjualan'}
-      sub={isEdit ? `${data.pelanggan} · ${data.tgl}` : 'Catat retur barang dari pelanggan'}
-      onClose={onClose} onSave={onSave}
-      saveLabel={isEdit ? 'Simpan Perubahan' : 'Simpan Retur'}>
-      <div style={{display:'grid', gridTemplateColumns:'1.3fr 1fr', gap:18, marginBottom:16}}>
-        <div className="form-section" style={{margin:0}}>
-          <div className="tabs-pills" style={{marginBottom:12}}>
-            <button className="active">Pelanggan</button>
-          </div>
-          <div className="form-row">
-            <div className="field"><label>Tgl. Bukti</label><input className="input" type="date" defaultValue="2026-04-30"/></div>
-            <div className="field"><label>No. Jual</label><select className="select" defaultValue={data?.refNota || ''}><option value="">— Pilih nota —</option>{NOTA_PENJUALAN.map(n=><option key={n.no}>{n.no}</option>)}</select></div>
-          </div>
-          <div className="form-row">
-            <div className="field"><label>Pelanggan *</label>
-              <select className="select" defaultValue={data?.pelanggan || ''}>
-                <option value="">— Pilih —</option>
-                {PELANGGAN.map(p=><option key={p.code}>{p.name}</option>)}
-              </select>
-            </div>
-            <div className="field"><label>Gudang</label>
-              <select className="select" defaultValue={data?.gudang || 'Gudang Konjoran'}>
-                {GUDANG_PJ.map(g=><option key={g}>{g}</option>)}
-              </select>
-            </div>
-          </div>
-          <div className="form-row">
-            <div className="field"><label>TOP (Hari)</label><input className="input mono" type="number" defaultValue={0}/></div>
-            <div className="field"><label>Jth. Tempo</label><input className="input" type="date" defaultValue="2026-04-30"/></div>
-          </div>
-          <div className="form-row">
-            <div className="field"><label>Sales</label><select className="select" defaultValue="Sales Baru 2">{SALES_LIST.map(s=><option key={s}>{s}</option>)}</select></div>
-            <div className="field"><label>Akun Tunai</label><select className="select"><option value="">— Pilih —</option>{AKUN_TUNAI.map(a=><option key={a}>{a}</option>)}</select></div>
-          </div>
-          <div className="field"><label>Alasan Retur</label>
-            <select className="select" defaultValue={data?.alasan || ''}>
-              <option value="">— Pilih alasan —</option>
-              <option>Cacat produksi</option><option>Salah kirim varian</option><option>Kemasan rusak</option>
-              <option>Tidak sesuai pesanan</option><option>Expired</option><option>Lain-lain</option>
-            </select>
-          </div>
-          <div className="field"><label>Catatan</label><textarea className="textarea"/></div>
-        </div>
-
-        <TotalsCard subtotal={subtotal} discPct={discPct} setDiscPct={setDiscPct} ppn={ppn} setPpn={setPpn} ppnMode={ppnMode} setPpnMode={setPpnMode} />
-      </div>
-
-      <div className="tabs-pills" style={{marginBottom:0}}>
-        <button className={itemTab==='stock'?'active':''} onClick={()=>setItemTab('stock')}>Stock</button>
-        <button className={itemTab==='lain'?'active':''} onClick={()=>setItemTab('lain')}>Pendapatan Lain</button>
-      </div>
-      <ItemTable kind="retur" lines={lines} setLines={setLines}/>
-    </PjModalShell>
-  );
-}
-
 // ─── Page wrapper ───────────────────────────────────────────────────────────
 
 function PelangganPage({ activeSub, onSubChange, onNavigate }) {
@@ -955,12 +813,10 @@ function PelangganPage({ activeSub, onSubChange, onNavigate }) {
       {activeSub === 'katalog' && <KatalogPelanggan onAdd={()=>setModal({kind:'pel'})} onEdit={(d)=>setModal({kind:'pel', data:d})}/>}
       {activeSub === 'order'   && <OrderPenjualan   onAdd={()=>setModal({kind:'order'})} onEdit={(d)=>setModal({kind:'order', data:d})}/>}
       {activeSub === 'nota'    && <NotaPenjualan    onAdd={()=>setModal({kind:'nota'})}  onEdit={(d)=>setModal({kind:'nota',  data:d})}/>}
-      {activeSub === 'retur'   && <ReturPenjualan   onAdd={()=>setModal({kind:'retur'})} onEdit={(d)=>setModal({kind:'retur', data:d})}/>}
 
       {modal?.kind === 'pel'   && <PelangganModal data={modal.data} onClose={close} onSave={onSave}/>}
       {modal?.kind === 'order' && <OrderModal     data={modal.data} onClose={close} onSave={onSave}/>}
       {modal?.kind === 'nota'  && <NotaModal      data={modal.data} onClose={close} onSave={onSave}/>}
-      {modal?.kind === 'retur' && <ReturModal     data={modal.data} onClose={close} onSave={onSave}/>}
     </div>
   );
 }

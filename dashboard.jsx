@@ -196,27 +196,36 @@ function Dashboard({ onOpenList }) {
 // ─── Home Dashboard (global analytics) ──────────────────────────────────────
 
 const ALL_HOME_KPIS = [
-  { id:'po',       label:'Total PO Bulan Ini',       val:'63',         unit:'',  delta:'▲ 8.4% vs bulan lalu', up:true,  data:[40,45,42,50,48,55,52,58,60,63] },
-  { id:'pelanggan',label:'Pelanggan Aktif',           val:'148',        unit:'',  delta:'▲ 3.2%',               up:true,  data:[130,133,135,138,140,142,144,145,147,148], color:'var(--realisasi)' },
-  { id:'barang',   label:'Total Barang Aktif',        val:'15',         unit:'',  delta:'4 di bawah min stock', up:false, data:[14,14,15,15,14,15,15,15,15,15], color:'#a16207' },
-  { id:'kas',      label:'Transaksi Kas Hari Ini',    val:'11',         unit:'',  delta:'▲ 2 vs kemarin',       up:true,  data:[6,8,7,9,8,10,9,11,9,11], color:'var(--realisasi)' },
-  { id:'hutang',   label:'Hutang Jatuh Tempo (7d)',   val:'Rp 48,5 jt', unit:'', delta:'3 supplier',           up:false, data:[20,25,22,30,28,35,40,45,42,48], color:'#dc2626' },
-  { id:'piutang',  label:'Piutang Outstanding',       val:'Rp 126 jt',  unit:'', delta:'12 pelanggan',         up:false, data:[80,90,95,100,105,110,115,120,123,126], color:'#7c3aed' },
-  { id:'mutasi',   label:'Mutasi Barang (30d)',        val:'9',          unit:'', delta:'2 pending',            up:false, data:[5,6,7,6,8,7,9,8,10,9], color:'#0369a1' },
-  { id:'jurnal',   label:'Jurnal Memorial Bulan Ini', val:'3',          unit:'', delta:'Semua approved',       up:true,  data:[1,1,2,1,2,2,3,2,3,3], color:'#8b5cf6' },
+  { id:'booking',   label:'Booking Bulan Ini',        val:'15',         delta:'▲ 5 vs bulan lalu',    up:true,  data:[6,8,7,9,10,11,10,12,13,15] },
+  { id:'pendapatan',label:'Pendapatan Lapangan (30h)', val:'Rp 3,8 jt',  delta:'▲ 12.4%',              up:true,  data:[2,2.2,2.5,2.8,2.9,3.1,3.2,3.4,3.6,3.8], color:'var(--realisasi)' },
+  { id:'dp',        label:'DP Terkumpul Bulan Ini',    val:'Rp 2,2 jt',  delta:'▲ 8.3%',               up:true,  data:[1,1.2,1.3,1.5,1.6,1.8,1.9,2.0,2.1,2.2], color:'#0369a1' },
+  { id:'pending',   label:'Booking Belum Konfirmasi',  val:'3',          delta:'perlu tindakan',        up:false, data:[1,2,1,2,3,2,1,2,3,3], color:'#dc2626' },
+  { id:'piutang',   label:'Piutang Outstanding (Jual)',val:'Rp 6,6 jt',  delta:'4 nota belum lunas',    up:false, data:[3,4,4.5,5,5.2,5.8,6,6.2,6.4,6.6], color:'#7c3aed' },
+  { id:'opname',    label:'Item Stok Aktif',           val:'24',         delta:'3 di bawah min stok',   up:false, data:[20,21,21,22,22,23,23,24,24,24], color:'#a16207' },
+  { id:'aset',      label:'Total Aset Tercatat',       val:'15',         delta:'Bangunan · Kendaraan · Perlengkapan', up:true, data:[12,12,13,13,14,14,14,15,15,15], color:'#0d9488' },
+  { id:'bagihasil', label:'Bagi Hasil Bulan Ini',      val:'3',          delta:'Semua tenant aktif',    up:true,  data:[1,1,2,1,2,2,3,2,3,3], color:'#8b5cf6' },
 ];
 
 function HomeDashboard({ onNavigate }) {
-  const [visibleKpis, setVisibleKpis] = React.useState(['po','pelanggan','barang','kas']);
+  const bookings = window.BOOKING_LIST || [];
+  const totalBooking  = bookings.length;
+  const pendingCount  = bookings.filter(b=>b.status==='Pending').length;
+  const berjalanCount = bookings.filter(b=>b.status==='Berjalan').length;
+  const totalDP       = bookings.reduce((s,b)=>s+(b.dp||0), 0);
+
+  const [visibleKpis, setVisibleKpis] = React.useState(['booking','pendapatan','dp','pending']);
   const [kpiPickerOpen, setKpiPickerOpen] = React.useState(false);
 
   const modules = [
-    { id:'purchase',  label:'Purchase',   icon:I.truck(22), color:'#0ea5e9', kpi:'63 PO aktif',           desc:'Order pembelian & supplier' },
-    { id:'sales',     label:'Pelanggan',  icon:I.users(22), color:'#10b981', kpi:'148 pelanggan aktif',   desc:'Order penjualan & nota' },
-    { id:'inventory', label:'Inventory',  icon:I.box(22),   color:'#f59e0b', kpi:'15 produk aktif',       desc:'Barang, mutasi & stock opname' },
-    { id:'finance',   label:'Akuntan',    icon:I.bank(22),  color:'#8b5cf6', kpi:'3 jurnal bulan ini',    desc:'Akun buku besar & aktiva' },
-    { id:'cashbank',  label:'Cash & Bank',icon:I.bank(22),  color:'#ec4899', kpi:'11 transaksi hari ini', desc:'Kas, bank, giro & pelunasan' },
-    { id:'master',    label:'Master Data',icon:I.users(22), color:'#64748b', kpi:'10 user aktif',         desc:'Salesman, gudang, satuan' },
+    { id:'so',         label:'Booking Order', icon:I.cal(22),     color:'#0ea5e9', kpi:`${totalBooking} booking aktif`,    desc:'Kelola booking lapangan Padel, Mini Soccer & Futsal' },
+    { id:'jual',       label:'Jual',          icon:I.cart(22),    color:'#10b981', kpi:'10 order aktif',                   desc:'Order penjualan, nota, dan katalog pelanggan' },
+    { id:'beli',       label:'Beli',          icon:I.truck(22),   color:'#0369a1', kpi:'6 nota pembelian',                 desc:'Order beli, nota pemasok, dan katalog supplier' },
+    { id:'kasbank',    label:'Kas Bank',       icon:I.bank(22),    color:'#8b5cf6', kpi:'11 transaksi hari ini',            desc:'Mutasi kas, bank, giro, dan pelunasan' },
+    { id:'bagihasil',  label:'Bagi Hasil',     icon:I.users(22),  color:'#ec4899', kpi:'3 tenant aktif',                   desc:'Hitung dan rekap bagi hasil dengan tenant' },
+    { id:'importayo',  label:'Import AYO',     icon:I.upload(22), color:'#6366f1', kpi:'Integrasi ayo.co.id',              desc:'Import data booking dari platform AYO' },
+    { id:'opname',     label:'Opname',         icon:I.box(22),     color:'#f59e0b', kpi:'24 item stok',                    desc:'Stok opname barang & perlengkapan olahraga' },
+    { id:'aset',       label:'Aset',           icon:I.invoice(22),color:'#0d9488', kpi:'15 aset tercatat',                 desc:'Daftar aset lapangan, kendaraan & bangunan' },
+    { id:'penyusutan', label:'Penyusutan',      icon:I.chart(22),  color:'#a16207', kpi:'Metode garis lurus',               desc:'Hitung penyusutan aset per kategori & periode' },
   ];
 
   const toggleKpi = (id) =>
@@ -229,7 +238,7 @@ function HomeDashboard({ onNavigate }) {
       <div className="page-head">
         <div>
           <h1>Selamat Datang, Administrator</h1>
-          <div className="sub">PT. Pacific Data Jaya — ringkasan operasional hari ini, {new Date().toLocaleDateString('id-ID', {weekday:'long', year:'numeric', month:'long', day:'numeric'})}</div>
+          <div className="sub">Program Lapangan — ringkasan operasional hari ini, {new Date().toLocaleDateString('id-ID', {weekday:'long', year:'numeric', month:'long', day:'numeric'})}</div>
         </div>
         <button className="btn btn-sm">{I.refresh()} Refresh</button>
       </div>
@@ -292,27 +301,27 @@ function HomeDashboard({ onNavigate }) {
 
       <div style={{display:'grid', gridTemplateColumns:'1.4fr 1fr', gap:16, marginTop:32}}>
         <div className="panel">
-          <h3>Aktivitas Terkini (Semua Modul)</h3>
+          <h3>Aktivitas Terkini</h3>
           <div className="timeline">
             <div className="timeline-item done">
               <div className="ti-when">Hari ini · 14:22</div>
-              <div className="ti-what"><b className="ti-who">Andi P.</b> menyetujui PO-2026-0631 · Purchase</div>
+              <div className="ti-what"><b className="ti-who">Admin</b> konfirmasi booking <span className="cell-link mono">BO-2026-0042</span> · Reza Permana · Padel</div>
             </div>
             <div className="timeline-item done">
               <div className="ti-when">Hari ini · 13:08</div>
-              <div className="ti-what"><b className="ti-who">Rini K.</b> memulai stock opname SO26040002 · Inventory</div>
+              <div className="ti-what"><b className="ti-who">Sales</b> menerbitkan nota <span className="cell-link mono">NJ-2026-0248</span> · Toko Sport Arena · {fmtRp(2365000)}</div>
             </div>
             <div className="timeline-item done">
               <div className="ti-when">Hari ini · 11:45</div>
-              <div className="ti-what"><b className="ti-who">Kevin H.</b> input kas masuk KM-2026-0412 · Cash &amp; Bank</div>
+              <div className="ti-what"><b className="ti-who">Admin</b> input kas masuk <span className="cell-link mono">KM-2026-0118</span> · DP Booking Padel · {fmtRp(100000)}</div>
             </div>
             <div className="timeline-item">
               <div className="ti-when">Kemarin · 17:30</div>
-              <div className="ti-what"><b className="ti-who">Brandon</b> membuat nota penjualan NJ-2026-0388 · Pelanggan</div>
+              <div className="ti-what"><b className="ti-who">Admin</b> booking baru <span className="cell-link mono">BO-2026-0039</span> · Tim Matahari FC · Mini Soccer</div>
             </div>
             <div className="timeline-item">
               <div className="ti-when">Kemarin · 09:12</div>
-              <div className="ti-what"><b className="ti-who">Sistem</b> mendeteksi 4 item barang di bawah min stock · Inventory</div>
+              <div className="ti-what"><b className="ti-who">Sistem</b> opname stok selesai — 24 item diverifikasi · Gudang Utama</div>
             </div>
           </div>
         </div>
@@ -321,12 +330,12 @@ function HomeDashboard({ onNavigate }) {
           <h3>Akses Cepat</h3>
           <div style={{display:'flex', flexDirection:'column', gap:8}}>
             {[
-              { label:'Buat PO Baru',         action:()=>onNavigate('purchase') },
-              { label:'Lihat PO List',         action:()=>onNavigate('purchase') },
-              { label:'Stock Opname',          action:()=>onNavigate('inventory') },
-              { label:'Input Kas Masuk',       action:()=>onNavigate('cashbank') },
-              { label:'Katalog Pelanggan',     action:()=>onNavigate('sales') },
-              { label:'Fitur Administrator',   action:()=>onNavigate('admin') },
+              { label:'Booking Baru',        action:()=>onNavigate('so',    'baru')    },
+              { label:'Daftar Booking',      action:()=>onNavigate('so',    'list')    },
+              { label:'Order Penjualan',     action:()=>onNavigate('jual',  'order')   },
+              { label:'Opname Stok',         action:()=>onNavigate('opname','opname')  },
+              { label:'Input Kas Masuk',     action:()=>onNavigate('kasbank','km')     },
+              { label:'Hitung Bagi Hasil',   action:()=>onNavigate('bagihasil','hitung') },
             ].map(q => (
               <button key={q.label} className="btn" style={{justifyContent:'flex-start', gap:8}} onClick={q.action}>
                 {I.arrowR(12)} {q.label}

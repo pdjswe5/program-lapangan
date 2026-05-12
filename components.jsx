@@ -185,21 +185,6 @@ function TopBar({ onHome, onNavigate }) {
         </button>
       </div>
 
-      {/* PT Selector */}
-      <div style={{display:'flex', alignItems:'center', gap:0, flexShrink:0}}>
-        <select
-          style={{
-            height:28, padding:'0 10px 0 8px', fontSize:12.5, fontWeight:500,
-            border:'1px solid var(--border)', borderRadius:6,
-            background:'var(--bg-card)', color:'var(--text)',
-            cursor:'pointer', minWidth:190, maxWidth:220,
-          }}
-          defaultValue="PT001"
-        >
-          {PERUSAHAAN.map(p => <option key={p.kode} value={p.kode}>{p.nama}</option>)}
-        </select>
-      </div>
-
       {/* Smart search */}
       <div className="topbar-search" ref={searchRef} style={{position:'relative'}}>
         <select className="scope" value={scope} onChange={e => { setScope(e.target.value); setSearchOpen(true); }}>
@@ -314,7 +299,7 @@ function TopBar({ onHome, onNavigate }) {
 // ---------- Module nav ----------
 const MODULES = [
   { id: 'home',       label: 'Home',        icon: I.home   },
-  { id: 'so',         label: 'SO / Booking',icon: I.cal    },
+  { id: 'so',         label: 'Booking Order',          icon: I.cal    },
   { id: 'jual',       label: 'Jual',        icon: I.cart   },
   { id: 'beli',       label: 'Beli',        icon: I.truck  },
   { id: 'kasbank',    label: 'Kas Bank',    icon: I.bank   },
@@ -348,13 +333,11 @@ const MODULE_SUBS = {
   jual:       [
     { id:'order', label:'Order Penjualan' },
     { id:'nota',  label:'Nota Penjualan'  },
-    { id:'retur', label:'Retur Penjualan' },
   ],
   beli:       [
     { id:'pemasok', label:'Katalog Pemasok' },
     { id:'order',   label:'Order Pembelian' },
     { id:'nota',    label:'Nota Pembelian'  },
-    { id:'retur',   label:'Retur Pembelian' },
   ],
   kasbank:    [
     { id:'kbg', label:'Kas, Bank & Giro' },

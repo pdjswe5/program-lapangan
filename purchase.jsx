@@ -21,12 +21,6 @@ const NOTA_LIST = [
   { no:'NP-2026-0001', date:'07-05-2026', notaDate:'06-05-2026', supplier:'CV Snack Arena',              gudang:'Gudang Utama', total: 3450000, status:'Realisasi'        },
 ];
 
-const RETUR_LIST = [
-  { no:'RP-2026-0004', date:'11-05-2026', supplier:'PT Sport Equipment Indonesia', noBeli:'PO-2026-0031', total: 1250000 },
-  { no:'RP-2026-0003', date:'10-05-2026', supplier:'CV Alat Olahraga Nusantara',  noBeli:'PO-2026-0029', total:  850000 },
-  { no:'RP-2026-0002', date:'09-05-2026', supplier:'CV Raket Prima Jaya',         noBeli:'PO-2026-0028', total:  650000 },
-  { no:'RP-2026-0001', date:'08-05-2026', supplier:'PT Bola Mas',                 noBeli:'PO-2026-0026', total:  420000 },
-];
 
 // ─── Shared helpers ────────────────────────────────────────────────────────────
 
@@ -566,152 +560,6 @@ function NotaPembelian({ onNavigate, onBack }) {
   );
 }
 
-// ─── Sub-screen 4: Retur Pembelian ────────────────────────────────────────────
-
-function ReturPembelian({ onNavigate, onBack }) {
-  const [search,  setSearch]  = React.useState('');
-  const [showAdd, setShowAdd] = React.useState(false);
-
-  const [dateBukti,     setDateBukti]     = React.useState('2026-04-30');
-  const [noBeli,        setNoBeli]        = React.useState('');
-  const [dateReturPjk,  setDateReturPjk]  = React.useState('2026-04-30');
-  const [noReturPjk,    setNoReturPjk]    = React.useState('');
-  const [noFakturPjk,   setNoFakturPjk]   = React.useState('');
-  const [supplier,      setSupplier]      = React.useState('');
-  const [gudang,        setGudang]        = React.useState(GUDANG_LIST[0]);
-  const [top,           setTop]           = React.useState(14);
-  const [due,           setDue]           = React.useState('2026-05-14');
-  const [catatan,       setCatatan]       = React.useState('');
-  const [akunTunai,     setAkunTunai]     = React.useState('');
-  const [lines,         setLines]         = React.useState([]);
-
-  const filtered = RETUR_LIST.filter(r =>
-    !search || r.no.toLowerCase().includes(search.toLowerCase()) || r.supplier.toLowerCase().includes(search.toLowerCase())
-  );
-
-  const handleClose = () => { setShowAdd(false); setLines([]); };
-  const handleSave  = () => { handleClose(); window.__erpToast && window.__erpToast('Retur pembelian berhasil disimpan.'); };
-
-  return (
-    <div className="page" data-screen-label="Purchase — Retur Pembelian">
-      <div className="crumbs"><a onClick={() => onNavigate?.('home')} style={{cursor:'pointer'}}>Home</a><span className="sep">/</span><a onClick={onBack} style={{cursor:'pointer'}}>Beli</a><span className="sep">/</span><span className="current">Retur Pembelian</span></div>
-      <div className="page-head">
-        <div><h1>Retur Pembelian</h1><div className="sub">{RETUR_LIST.length} retur terdaftar</div></div>
-        <button className="btn btn-primary" onClick={() => setShowAdd(true)}>{I.plus()} Tambah Retur</button>
-      </div>
-
-      <div style={{display:'flex', gap:8, marginBottom:14}}>
-        <input className="input" style={{flex:1, maxWidth:340}} placeholder="Cari no. retur, supplier..." value={search} onChange={e => setSearch(e.target.value)} />
-      </div>
-
-      <div className="panel" style={{padding:0, overflow:'hidden'}}>
-        <table className="data">
-          <thead>
-            <tr>
-              <th>No. Retur</th>
-              <th>Tgl. Bukti</th>
-              <th>Pemasok</th>
-              <th>No. Beli (Ref)</th>
-              <th className="num">Total Rp</th>
-              <th style={{width:90}}></th>
-            </tr>
-          </thead>
-          <tbody>
-            {filtered.map(r => (
-              <tr key={r.no}>
-                <td><a className="cell-link">{r.no}</a></td>
-                <td>{r.date}</td>
-                <td>{r.supplier}</td>
-                <td className="mono muted">{r.noBeli}</td>
-                <td className="num mono">{fmtRp(r.total)}</td>
-                <td>
-                  <span className="row-actions">
-                    <button className="btn-icon" title="Edit">{I.edit()}</button>
-                    <button className="btn-icon" title="Print">{I.print()}</button>
-                    <button className="btn-icon del" title="Hapus">{I.trash()}</button>
-                  </span>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {showAdd && (
-        <div className="modal-backdrop" onClick={handleClose}>
-          <div className="modal" onClick={e => e.stopPropagation()}>
-            <div className="modal-head">
-              <div><h2>Tambah Retur Pembelian</h2><div className="sub">Catat retur dan klaim ke pemasok.</div></div>
-              <button className="btn btn-icon" onClick={handleClose}>{I.x(16)}</button>
-            </div>
-            <div className="modal-body">
-              <div className="form-grid">
-                <div className="form-section">
-                  <h4>Informasi Retur</h4>
-                  <div className="form-row">
-                    <div className="field"><label>Tgl. Bukti</label><input className="input" type="date" value={dateBukti} onChange={e => setDateBukti(e.target.value)} /></div>
-                    <div className="field">
-                      <label>No. Beli</label>
-                      <select className="select" value={noBeli} onChange={e => setNoBeli(e.target.value)}>
-                        <option value="">— Pilih No. Beli —</option>
-                        {PO_LIST.map(p => <option key={p.no} value={p.no}>{p.no}</option>)}
-                      </select>
-                    </div>
-                  </div>
-                  <div className="form-row">
-                    <div className="field"><label>Tgl. Retur Pajak</label><input className="input" type="date" value={dateReturPjk} onChange={e => setDateReturPjk(e.target.value)} /></div>
-                    <div className="field"><label>No. Retur Pajak</label><input className="input" value={noReturPjk} onChange={e => setNoReturPjk(e.target.value)} /></div>
-                  </div>
-                  <div className="field"><label>No. Faktur Pajak</label><input className="input" value={noFakturPjk} onChange={e => setNoFakturPjk(e.target.value)} /></div>
-                  <div className="form-row">
-                    <div className="field">
-                      <label>Pemasok</label>
-                      <select className="select" value={supplier} onChange={e => setSupplier(e.target.value)}>
-                        <option value="">— Pilih Pemasok —</option>
-                        {ALL_SUPPLIERS.map(s => <option key={s.code} value={s.code}>{s.name}</option>)}
-                      </select>
-                    </div>
-                    <div className="field">
-                      <label>Gudang</label>
-                      <select className="select" value={gudang} onChange={e => setGudang(e.target.value)}>
-                        {GUDANG_LIST.map(g => <option key={g}>{g}</option>)}
-                      </select>
-                    </div>
-                  </div>
-                  <div className="form-row">
-                    <div className="field"><label>TOP [Hari]</label><input className="input" type="number" value={top} onChange={e => setTop(+e.target.value)} /></div>
-                    <div className="field"><label>Jth. Tempo</label><input className="input" type="date" value={due} onChange={e => setDue(e.target.value)} /></div>
-                  </div>
-                  <div className="form-row">
-                    <div className="field"><label>Catatan</label><input className="input" value={catatan} onChange={e => setCatatan(e.target.value)} /></div>
-                    <div className="field">
-                      <label>Akun Tunai</label>
-                      <select className="select" value={akunTunai} onChange={e => setAkunTunai(e.target.value)}>
-                        {AKUN_TUNAI_LIST.map(a => <option key={a}>{a}</option>)}
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <PurchTotalsCard lines={lines} />
-              </div>
-              <div style={{marginTop:20}}>
-                <PurchItemTable lines={lines} setLines={setLines} hasRealisasi={false} />
-              </div>
-            </div>
-            <div className="modal-foot">
-              <div className="muted" style={{fontSize:12.5}}><kbd>Esc</kbd> untuk batal</div>
-              <div className="right">
-                <button className="btn" onClick={handleClose}>Batal</button>
-                <button className="btn btn-primary" onClick={handleSave}>{I.check()} Simpan Retur</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
 // ─── Purchase Dashboard ────────────────────────────────────────────────────────
 
 function PurchaseDashboard({ onSubChange, onNavigate }) {
@@ -721,7 +569,7 @@ function PurchaseDashboard({ onSubChange, onNavigate }) {
       <div className="page-head">
         <div>
           <h1>Pembelian Workspace</h1>
-          <div className="sub">Kelola order pembelian, nota, dan retur ke pemasok olahraga.</div>
+          <div className="sub">Kelola order pembelian dan nota ke pemasok olahraga.</div>
         </div>
         <button className="btn btn-sm">{I.refresh()} Refresh</button>
       </div>
@@ -753,12 +601,11 @@ function PurchaseDashboard({ onSubChange, onNavigate }) {
         </div>
       </div>
 
-      <h3 className="section-title">Modul Beli <span className="count">4</span></h3>
+      <h3 className="section-title">Modul Beli <span className="count">3</span></h3>
       <div className="tile-grid">
-        <Tile icon={I.users(20)} title="Katalog Pemasok"  desc="Master data pemasok, kontrak, syarat pembayaran."                  accentColor="#0369a1"                      onClick={() => onSubChange('pemasok')} />
-        <Tile icon={I.list(20)}  title="Order Pembelian"  desc="Buat, kelola, dan setujui order pembelian ke supplier."  badge="63 POs to review" badgeKind="pulse" count="63" onClick={() => onSubChange('order')}   />
-        <Tile icon={I.invoice(20)} title="Nota Pembelian" desc="Match nota ke GR & PO, kelola pembayaran dan jatuh tempo." badge="6 pending"       accentColor="#0d9488"      onClick={() => onSubChange('nota')}    />
-        <Tile icon={I.refresh(20)} title="Retur Pembelian" desc="Catat retur pembelian dan klaim ke supplier."                     accentColor="#b45309"                      onClick={() => onSubChange('retur')}   />
+        <Tile icon={I.users(20)}   title="Katalog Pemasok" desc="Master data pemasok, kontrak, syarat pembayaran."                  accentColor="#0369a1" onClick={() => onSubChange('pemasok')} />
+        <Tile icon={I.list(20)}    title="Order Pembelian" desc="Buat, kelola, dan setujui order pembelian ke supplier."  badge="63 POs to review" badgeKind="pulse" count="63" onClick={() => onSubChange('order')} />
+        <Tile icon={I.invoice(20)} title="Nota Pembelian"  desc="Match nota ke GR & PO, kelola pembayaran dan jatuh tempo." badge="6 pending" accentColor="#0d9488" onClick={() => onSubChange('nota')} />
       </div>
 
       <div style={{display:'grid', gridTemplateColumns:'1.4fr 1fr', gap:16, marginTop:32}}>
@@ -767,7 +614,6 @@ function PurchaseDashboard({ onSubChange, onNavigate }) {
           <div className="timeline">
             <div className="timeline-item done"><div className="ti-when">Hari ini · 14:22</div><div className="ti-what"><b className="ti-who">Admin</b> menyetujui <a className="cell-link">PO-2026-0031</a> · PT Sport Equipment · {fmtRp(12450000)}</div></div>
             <div className="timeline-item done"><div className="ti-when">Hari ini · 11:08</div><div className="ti-what"><b className="ti-who">Sistem</b> menerima nota NP-2026-0006 dari PT Sport Equipment Indonesia</div></div>
-            <div className="timeline-item"><div className="ti-when">Kemarin · 16:30</div><div className="ti-what"><b className="ti-who">Admin</b> membuat draft retur RP-2026-0004 untuk PT Sport Equipment</div></div>
             <div className="timeline-item"><div className="ti-when">Kemarin · 09:12</div><div className="ti-what"><b className="ti-who">Sistem</b> mengirim 2 reminder jatuh tempo ke pemasok</div></div>
           </div>
         </div>
@@ -801,7 +647,6 @@ function PurchasePage({ activeSub, onSubChange, onNavigate }) {
   if (activeSub === 'pemasok')   return <KatalogPemasok onNavigate={onNavigate} onBack={onBack} />;
   if (activeSub === 'order')     return <OrderPembelian  onNavigate={onNavigate} onBack={onBack} />;
   if (activeSub === 'nota')      return <NotaPembelian   onNavigate={onNavigate} onBack={onBack} />;
-  if (activeSub === 'retur')     return <ReturPembelian  onNavigate={onNavigate} onBack={onBack} />;
   return null;
 }
 

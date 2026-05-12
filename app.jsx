@@ -201,7 +201,7 @@ function App() {
 
         <TweakSection label="Navigasi Cepat" />
         <TweakButton label="Dashboard"      onClick={() => activateGroup('home')} />
-        <TweakButton label="SO / Booking"   onClick={() => activateGroup('so')}         secondary />
+        <TweakButton label="Booking Order"              onClick={() => activateGroup('so')}         secondary />
         <TweakButton label="Jual"           onClick={() => activateGroup('jual')}        secondary />
         <TweakButton label="Beli"           onClick={() => activateGroup('beli')}        secondary />
         <TweakButton label="Kas Bank"       onClick={() => activateGroup('kasbank')}     secondary />

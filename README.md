@@ -1,37 +1,35 @@
-# PDJ ERP — Pacific Data Jaya
+# Program Lapangan
 
-Prototype sistem ERP berbasis web untuk PT. Pacific Data Jaya. Dibangun dengan React 18 dan Babel Standalone — tidak memerlukan build tool atau instalasi npm.
+Sistem manajemen fasilitas olahraga berbasis web untuk bisnis persewaan padel, mini soccer, dan futsal. Dibangun dengan React 18 dan Babel Standalone — tidak memerlukan build tool atau instalasi npm.
 
 ## Modul
 
 | Modul | Fitur |
 |---|---|
-| **Purchase** | Order Pembelian, Nota Pembelian, Retur Pembelian |
-| **Inventory** | Katalog Barang, Mutasi, Penyesuaian, Stock Opname |
-| **Pelanggan** | Katalog Pelanggan, Order & Nota Penjualan, Retur |
-| **Akuntan** | Katalog Akun, Aktiva Tetap, Jurnal Memorial |
-| **Keuangan** | Kas/Bank, Transfer, Giro, Pelunasan |
-| **Reports** | Laporan Persediaan, SPK, Produksi |
-| **Master Data** | Salesman, Gudang, Satuan, User, Menu |
-| **System Admin** | Profil Perusahaan, Nilai Default, Fitur Administrator, Sesi Login |
+| **SO** | Daftar Booking, Form Booking Baru (Divisi, Lapangan, Jam, Penyewa) |
+| **Jual** | Katalog Pelanggan, Order Penjualan, Nota Penjualan |
+| **Beli** | Katalog Pemasok, Order Pembelian, Nota Pembelian |
+| **Kas Bank** | Kas/Bank, Kas Masuk/Keluar, Bank Masuk/Keluar, Transfer, Giro, Pelunasan |
+| **Bagi Hasil** | Hitung Bagi Hasil Tenant, Riwayat |
+| **Import AYO** | Upload & Import data booking dari platform AYO (ayo.co.id) |
+| **Opname** | Katalog Stok, Stock Opname, Mutasi Barang, Penyesuaian |
+| **Aset** | Katalog Aset Tetap (Bangunan, Kendaraan, Perlengkapan) |
+| **Penyusutan** | Hitung Penyusutan per Periode (Metode Garis Lurus) |
 
 ## Cara Menjalankan
 
 Project ini adalah aplikasi HTML statis — cukup serve file-nya dengan web server lokal.
 
-### Github Pages
-[ERP Pada Jaya](https://pdjswe5.github.io/ERP-UI/erp.html)
-
 ### Menggunakan VS Code Live Preview (Recommended)
 
 1. Install ekstensi [Live Preview](https://marketplace.visualstudio.com/items?itemName=ms-vscode.live-server) di VS Code
-2. Buka folder `ERP` di VS Code
+2. Buka folder project di VS Code
 3. Klik kanan file `erp.html` → **Show Preview**
    - Atau tekan `Ctrl+Shift+P` → ketik `Live Preview: Show Preview (External Browser)`
 
 > Konfigurasi default preview sudah diatur di `.vscode/settings.json`.
 
-### Menggunakan Python (alternatif tanpa instalasi)
+### Menggunakan Python
 
 ```bash
 python -m http.server 8080
@@ -52,26 +50,36 @@ Lalu buka URL yang muncul di terminal dan tambahkan `/erp.html`.
 ## Struktur File
 
 ```
-ERP/
-├── erp.html          # Entry point — load semua script
-├── styles.css        # Global stylesheet
-├── app.jsx           # App shell & routing
-├── components.jsx    # TopBar, MultiTabNav, icon set, shared components
-├── data.jsx          # Sample data (PO, items, suppliers)
-├── dashboard.jsx     # Home dashboard
-├── purchase.jsx      # Modul Purchase
-├── inventory.jsx     # Modul Inventory
-├── pelanggan.jsx     # Modul Pelanggan / Sales
-├── akuntan.jsx       # Modul Akuntan
-├── keuangan.jsx      # Modul Keuangan / Kas & Bank
-├── master.jsx        # Modul Master Data
-├── reports.jsx       # Modul Reports
-├── admin.jsx         # Modul System Admin
-├── po-list.jsx       # Komponen list Purchase Order
-├── po-detail.jsx     # Komponen detail Purchase Order
-├── po-dialog.jsx     # Dialog buat/edit Purchase Order
-└── tweaks-panel.jsx  # Panel kustomisasi tema & layout
+program-lapangan/
+├── erp.html              # Entry point — load semua script
+├── styles.css            # Global stylesheet
+├── app.jsx               # App shell & routing
+├── components.jsx        # TopBar, MultiTabNav, icon set, shared components
+├── data.jsx              # Data dummy (perusahaan, aset, barang, booking, tenant, dll.)
+├── dashboard.jsx         # Home dashboard
+├── so.jsx                # Modul SO (Booking Lapangan)
+├── pelanggan.jsx         # Modul Jual (Order & Nota Penjualan)
+├── purchase.jsx          # Modul Beli (Order & Nota Pembelian)
+├── keuangan.jsx          # Modul Kas Bank
+├── bagi-hasil.jsx        # Modul Bagi Hasil Tenant
+├── import-ayo.jsx        # Modul Import AYO
+├── inventory.jsx         # Modul Opname (Stok Barang)
+├── akuntan.jsx           # Modul Aset
+├── penyusutan.jsx        # Modul Penyusutan
+├── po-list.jsx           # Komponen list Purchase Order
+├── po-detail.jsx         # Komponen detail Purchase Order
+├── po-dialog.jsx         # Dialog buat/edit Purchase Order
+└── tweaks-panel.jsx      # Panel kustomisasi tema & layout
 ```
+
+## Data Dummy
+
+- **5 Perusahaan**: PT Lapangan Jaya Sport, PT Arena Padel Nusantara, PT Mini Soccer Indonesia, PT Futsal Bersatu, CV Sport Center Mandiri
+- **6 Tenant** (Bagi Hasil): Warung Kopi Lapangan, Toko Sport Corner, dll.
+- **15 Aset**: Lapangan Padel 1 & 2, Lapangan Mini Soccer, Lapangan Futsal, Kendaraan, Perlengkapan
+- **20+ Stok Barang**: Minuman (Cleo, Isoplus, Pocari, Aqua), Makanan (Snack, Chitato), Perlengkapan (Bola, Raket, Kaos Kaki)
+- **13 Booking**: Data SO dengan status Pending / Konfirmasi / Berjalan / Selesai / Batal
+- **Divisi**: Padel · Mini Soccer · Futsal
 
 ## Tech Stack
 
