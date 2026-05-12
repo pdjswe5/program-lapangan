@@ -554,13 +554,13 @@ function AdminSesi() {
         <div className="table-scroll">
           <table className="data">
             <thead>
-              <tr style={{background:'var(--primary)'}}>
-                <th style={{color:'#fff'}}>Username</th>
-                <th style={{color:'#fff'}}>Id Sesi</th>
-                <th style={{color:'#fff'}}>Id Koneksi</th>
-                <th style={{color:'#fff'}}>Lokasi</th>
-                <th style={{color:'#fff'}}>Device</th>
-                <th style={{color:'#fff'}}>Waktu</th>
+              <tr>
+                <th>Username</th>
+                <th>Id Sesi</th>
+                <th>Id Koneksi</th>
+                <th>Lokasi</th>
+                <th>Device</th>
+                <th>Waktu</th>
               </tr>
             </thead>
             <tbody>

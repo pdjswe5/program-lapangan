@@ -720,6 +720,7 @@ function OpnameModal({ data, onClose, onSave }) {
                     <th className="num">Stock Sistem</th>
                     <th className="num" style={{width:90}}>Stock Fisik</th>
                     <th className="num">Selisih</th>
+                    <th>Status</th>
                     <th>Catatan</th>
                   </tr>
                 </thead>
@@ -733,8 +734,13 @@ function OpnameModal({ data, onClose, onSave }) {
                         <td className="muted" style={{padding:'0 8px', fontSize:12.5}}>{it.gudang}</td>
                         <td className="num mono" style={{padding:'0 8px'}}>{fmtNum(it.stock)}</td>
                         <td><input className="cell num" type="number" defaultValue={it.fisik}/></td>
-                        <td className="num mono" style={{padding:'0 8px', color: selisih===0 ? 'var(--text-3)' : selisih<0 ? 'var(--danger)' : 'var(--realisasi)', fontWeight: selisih===0?400:600}}>
+                        <td className="num mono" style={{padding:'0 8px'}}>
                           {selisih > 0 ? '+' : ''}{selisih}
+                        </td>
+                        <td style={{padding:'0 8px'}}>
+                          {selisih === 0 ? <span className="pill approved">Seimbang</span> :
+                           selisih < 0 ? <span className="pill pending">Kurang</span> :
+                           <span className="pill realisasi">Lebih</span>}
                         </td>
                         <td><input className="cell" placeholder="—" style={{padding:'0 8px'}}/></td>
                       </tr>

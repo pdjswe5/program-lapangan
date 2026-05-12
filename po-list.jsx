@@ -165,7 +165,7 @@ function POList({ onOpenDetail, onOpenNew, density }) {
             <tbody>
               {pageItems.map(po => (
                 <tr key={po.no}
-                    className={`${selected.has(po.no) ? 'selected' : ''} ${po.status === 'Realisasi' ? 'realisasi' : ''}`}
+                    className={`${selected.has(po.no) ? 'selected' : ''}`}
                     onClick={() => onOpenDetail(po)}>
                   <td onClick={e=>e.stopPropagation()}>
                     <input type="checkbox" className="cb" checked={selected.has(po.no)} onChange={()=>toggleOne(po.no)} />

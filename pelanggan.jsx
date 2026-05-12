@@ -271,12 +271,13 @@ function KatalogPelanggan({ onAdd, onEdit }) {
                 <th>NIK</th>
                 <th>Email</th>
                 <th>Kontak</th>
+                <th>Flag</th>
                 <th style={{width:100}}>Aksi</th>
               </tr>
             </thead>
             <tbody>
               {filtered.map(p => (
-                <tr key={p.code} onClick={()=>onEdit(p)} style={p.flag === 'pink' ? { background: '#fde4ec' } : null}>
+                <tr key={p.code} onClick={()=>onEdit(p)}>
                   <td><span className="cell-link">{p.name}</span></td>
                   <td className="mono muted">{p.code}</td>
                   <td>{p.alamat || <span className="muted">—</span>}</td>
@@ -286,6 +287,7 @@ function KatalogPelanggan({ onAdd, onEdit }) {
                   <td className="mono">{p.nik || <span className="muted">—</span>}</td>
                   <td className={p.email ? 'cell-link' : ''}>{p.email || <span className="muted">—</span>}</td>
                   <td>{p.kontak || <span className="muted">—</span>}</td>
+                  <td>{p.flag === 'pink' ? <span className="pill pending">Perlu Review</span> : <span className="muted">—</span>}</td>
                   <td onClick={e=>e.stopPropagation()}>
                     <div className="row-actions">
                       <button className="btn btn-icon btn-sm" title="Edit" onClick={()=>onEdit(p)}>{I.edit()}</button>

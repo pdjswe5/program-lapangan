@@ -465,9 +465,9 @@ function NotaPembelian({ onNavigate, onBack }) {
               </tr>
             </thead>
             <tbody>
-              {filtered.map(n => (
-                <tr key={n.no} className={n.status === 'Realisasi' ? 'realisasi' : ''}>
-                  <td><a className="cell-link">{n.no}</a></td>
+            {filtered.map(n => (
+              <tr key={n.no}>
+                <td><a className="cell-link">{n.no}</a></td>
                   <td>{n.date}</td>
                   <td>{n.notaDate}</td>
                   <td>{n.supplier}</td>

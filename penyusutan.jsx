@@ -191,7 +191,7 @@ function PenyusutanHitung({ onNavigate }) {
               })}
             </tbody>
             <tfoot>
-              <tr style={{fontWeight:600, background:'var(--bg-sub)'}}>
+              <tr style={{fontWeight:600}}>
                 <td colSpan={showDetail?4:3} style={{padding:'10px 12px', textAlign:'right', fontSize:12, textTransform:'uppercase', letterSpacing:'.04em', color:'var(--text-2)'}}>Total</td>
                 <td></td>
                 <td className="num mono" style={{padding:'10px 8px'}}>{fmtRp(filtered.reduce((s,a)=>s+a.nilaiPerolehan,0))}</td>
