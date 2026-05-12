@@ -109,7 +109,7 @@ function PODetail({ po, onBack }) {
 
             <div className="panel">
               <h3>Catatan & Term</h3>
-              <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:18}}>
+              <div className="grid-responsive" style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:18}}>
                 <div>
                   <div style={{color:'var(--text-3)', fontSize:12, marginBottom:6}}>Catatan Internal</div>
                   <div style={{fontSize:13, lineHeight:1.6}}>Order rutin bulanan untuk stok service. Mohon konfirmasi ketersediaan via WhatsApp sebelum pengiriman.</div>

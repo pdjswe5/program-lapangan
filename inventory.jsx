@@ -481,7 +481,7 @@ function BarangModal({ data, onClose, onSave }) {
       sub={isEdit ? data.name : 'Lengkapi informasi master barang'}
       onClose={onClose} onSave={onSave}
       saveLabel={isEdit ? 'Simpan Perubahan' : 'Simpan Barang'}>
-      <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:24}}>
+      <div className="grid-responsive" style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:24}}>
         <div className="form-section">
           <h4>Identitas</h4>
           <div className="field"><label>Nama Barang *</label><input className="input" value={form.name} onChange={e=>set('name',e.target.value)} placeholder="Contoh: Brake Pad Set Front — Ranger"/></div>
@@ -857,7 +857,7 @@ function InventoryDashboard({ onOpenSub, onNavigate }) {
         ))}
       </div>
 
-      <div style={{display:'grid', gridTemplateColumns:'1.4fr 1fr', gap:16, marginTop:32}}>
+      <div className="grid-responsive" style={{display:'grid', gridTemplateColumns:'1.4fr 1fr', gap:16, marginTop:32}}>
         <div className="panel">
           <h3>Stock Kritis (Perlu Reorder)</h3>
           <div style={{display:'flex', flexDirection:'column', gap:10}}>

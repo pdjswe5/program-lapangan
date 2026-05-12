@@ -110,7 +110,7 @@ function BHHitungPage({ onSaved }) {
         </div>
       </div>
 
-      <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:24, maxWidth:900}}>
+      <div className="grid-responsive" style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:24, maxWidth:900}}>
         <div className="form-section panel">
           <h4>Input Data</h4>
           <div className="field">

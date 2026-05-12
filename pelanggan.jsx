@@ -144,7 +144,7 @@ function PelangganDashboard({ onOpenSub, onNavigate }) {
         ))}
       </div>
 
-      <div style={{display:'grid', gridTemplateColumns:'1.4fr 1fr', gap:16, marginTop:32}}>
+      <div className="grid-responsive" style={{display:'grid', gridTemplateColumns:'1.4fr 1fr', gap:16, marginTop:32}}>
         <div className="panel">
           <h3>Top Pelanggan (30 Hari)</h3>
           <div style={{display:'flex', flexDirection:'column', gap:14}}>
@@ -646,7 +646,7 @@ function OrderModal({ data, onClose, onSave }) {
       sub={isEdit ? `${data.pelanggan} · ${data.tgl}` : 'Buat order penjualan baru'}
       onClose={onClose} onSave={onSave}
       saveLabel={isEdit ? 'Simpan Perubahan' : 'Simpan Order'}>
-      <div style={{display:'grid', gridTemplateColumns:'1.3fr 1fr', gap:18, marginBottom:16}}>
+      <div className="grid-responsive" style={{display:'grid', gridTemplateColumns:'1.3fr 1fr', gap:18, marginBottom:16}}>
         <div className="form-section" style={{margin:0}}>
           <div className="tabs-pills" style={{marginBottom:12}}>
             <button className={tab==='pelanggan'?'active':''} onClick={()=>setTab('pelanggan')}>Pelanggan</button>
@@ -734,7 +734,7 @@ function NotaModal({ data, onClose, onSave }) {
       sub={isEdit ? `${data.pelanggan} · ${data.tgl}` : 'Terbitkan nota penjualan ke pelanggan'}
       onClose={onClose} onSave={onSave}
       saveLabel={isEdit ? 'Simpan Perubahan' : 'Terbitkan Nota'}>
-      <div style={{display:'grid', gridTemplateColumns:'1.3fr 1fr', gap:18, marginBottom:16}}>
+      <div className="grid-responsive" style={{display:'grid', gridTemplateColumns:'1.3fr 1fr', gap:18, marginBottom:16}}>
         <div className="form-section" style={{margin:0}}>
           <div className="tabs-pills" style={{marginBottom:12}}>
             <button className={tab==='pelanggan'?'active':''} onClick={()=>setTab('pelanggan')}>Pelanggan</button>

@@ -62,7 +62,7 @@ function SODashboard({ onOpenSub, onNavigate }) {
         <div className="kpi"><div className="lbl">Total DP Masuk</div><div className="val mono">{fmtRp(totalDP)}</div><div className="delta up">{selesai} selesai</div></div>
       </div>
 
-      <div className="tile-grid" style={{gridTemplateColumns:'repeat(2,1fr)', marginTop:8}}>
+      <div className="tile-grid" style={{marginTop:8}}>
         {[
           { id:'list', icon:I.list(20), title:'Daftar Booking', desc:'Lihat semua booking order aktif, filter per divisi dan tanggal, ubah status.', badge:`${totalSO} booking`, accent:'#0ea5e9' },
           { id:'baru', icon:I.plus(20), title:'Booking Baru',   desc:'Buat booking order baru — pilih divisi, lapangan, jam, dan data penyewa.',    badge:null,            accent:'#10b981' },
@@ -77,7 +77,7 @@ function SODashboard({ onOpenSub, onNavigate }) {
         ))}
       </div>
 
-      <div style={{display:'grid', gridTemplateColumns:'1.5fr 1fr', gap:16, marginTop:24}}>
+      <div className="grid-responsive" style={{display:'grid', gridTemplateColumns:'1.5fr 1fr', gap:16, marginTop:24}}>
         <div className="panel">
           <h3>Booking Terkini</h3>
           <div className="table-scroll" style={{maxHeight:260}}>
@@ -271,7 +271,7 @@ function SOFormBaru({ onSave, onCancel }) {
         </div>
       </div>
 
-      <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:24, maxWidth:960}}>
+      <div className="grid-responsive" style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:24, maxWidth:960}}>
         <div className="form-section panel">
           <h4>Detail Lapangan</h4>
           <div className="field"><label>Divisi *</label>

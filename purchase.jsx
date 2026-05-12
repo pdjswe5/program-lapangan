@@ -205,36 +205,38 @@ function KatalogPemasok({ onNavigate, onBack }) {
         <button className="btn btn-sm">{I.filter()} Pilih Kolom</button>
       </div>
 
-      <div className="panel" style={{padding:0, overflow:'hidden'}}>
-        <table className="data">
-          <thead>
-            <tr>
-              <th>Nama Perusahaan</th>
-              <th>Kode</th>
-              <th>Alamat</th>
-              <th>Kota</th>
-              <th>Telepon</th>
-              <th style={{width:80}}></th>
-            </tr>
-          </thead>
-          <tbody>
-            {filtered.map(s => (
-              <tr key={s.code}>
-                <td style={{fontWeight:500, color:'var(--primary)'}}>{s.name}</td>
-                <td className="mono">{s.code}</td>
-                <td>{s.addr || '—'}</td>
-                <td>{s.city}</td>
-                <td>{s.phone}</td>
-                <td>
-                  <span className="row-actions">
-                    <button className="btn-icon" title="Edit">{I.edit()}</button>
-                    <button className="btn-icon del" title="Hapus">{I.trash()}</button>
-                  </span>
-                </td>
+      <div className="panel" style={{padding:0}}>
+        <div className="table-scroll">
+          <table className="data">
+            <thead>
+              <tr>
+                <th>Nama Perusahaan</th>
+                <th>Kode</th>
+                <th>Alamat</th>
+                <th>Kota</th>
+                <th>Telepon</th>
+                <th style={{width:80}}></th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filtered.map(s => (
+                <tr key={s.code}>
+                  <td style={{fontWeight:500, color:'var(--primary)'}}>{s.name}</td>
+                  <td className="mono">{s.code}</td>
+                  <td>{s.addr || '—'}</td>
+                  <td>{s.city}</td>
+                  <td>{s.phone}</td>
+                  <td>
+                    <span className="row-actions">
+                      <button className="btn-icon" title="Edit">{I.edit()}</button>
+                      <button className="btn-icon del" title="Hapus">{I.trash()}</button>
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
         <div style={{padding:'8px 12px', fontSize:12.5, color:'var(--text-3)', borderTop:'1px solid var(--border)'}}>
           Jumlah: {filtered.length}
         </div>
@@ -320,41 +322,43 @@ function OrderPembelian({ onNavigate, onBack }) {
         </select>
       </div>
 
-      <div className="panel" style={{padding:0, overflow:'hidden'}}>
-        <table className="data">
-          <thead>
-            <tr>
-              <th>No. Order {I.chev(10)}</th>
-              <th>Tgl. Bukti</th>
-              <th>Pemasok</th>
-              <th>No. Referensi</th>
-              <th>Status</th>
-              <th>Jth. Tempo</th>
-              <th className="num">Total Rp</th>
-              <th style={{width:90}}></th>
-            </tr>
-          </thead>
-          <tbody>
-            {filtered.map(p => (
-              <tr key={p.no}>
-                <td><a className="cell-link">{p.no}</a></td>
-                <td>{p.date}</td>
-                <td>{p.supplier}</td>
-                <td className="mono muted">{p.ref}</td>
-                <td><span className={`pill ${STATUS_CLASS[p.status] || 'draft'}`}>{p.status}</span></td>
-                <td>{p.due}</td>
-                <td className="num mono">{fmtRp(p.total)}</td>
-                <td>
-                  <span className="row-actions">
-                    <button className="btn-icon" title="Edit">{I.edit()}</button>
-                    <button className="btn-icon" title="Print">{I.print()}</button>
-                    <button className="btn-icon del" title="Hapus">{I.trash()}</button>
-                  </span>
-                </td>
+      <div className="panel" style={{padding:0}}>
+        <div className="table-scroll">
+          <table className="data">
+            <thead>
+              <tr>
+                <th>No. Order {I.chev(10)}</th>
+                <th>Tgl. Bukti</th>
+                <th>Pemasok</th>
+                <th>No. Referensi</th>
+                <th>Status</th>
+                <th>Jth. Tempo</th>
+                <th className="num">Total Rp</th>
+                <th style={{width:90}}></th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filtered.map(p => (
+                <tr key={p.no}>
+                  <td><a className="cell-link">{p.no}</a></td>
+                  <td>{p.date}</td>
+                  <td>{p.supplier}</td>
+                  <td className="mono muted">{p.ref}</td>
+                  <td><span className={`pill ${STATUS_CLASS[p.status] || 'draft'}`}>{p.status}</span></td>
+                  <td>{p.due}</td>
+                  <td className="num mono">{fmtRp(p.total)}</td>
+                  <td>
+                    <span className="row-actions">
+                      <button className="btn-icon" title="Edit">{I.edit()}</button>
+                      <button className="btn-icon" title="Print">{I.print()}</button>
+                      <button className="btn-icon del" title="Hapus">{I.trash()}</button>
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {showAdd && (
@@ -445,41 +449,43 @@ function NotaPembelian({ onNavigate, onBack }) {
         <input className="input" style={{flex:1, maxWidth:340}} placeholder="Cari no. nota, supplier..." value={search} onChange={e => setSearch(e.target.value)} />
       </div>
 
-      <div className="panel" style={{padding:0, overflow:'hidden'}}>
-        <table className="data">
-          <thead>
-            <tr>
-              <th>No. Nota</th>
-              <th>Tgl. Bukti</th>
-              <th>Tgl. Nota / Sj</th>
-              <th>Pemasok</th>
-              <th>Gudang</th>
-              <th>Status</th>
-              <th className="num">Total Rp</th>
-              <th style={{width:90}}></th>
-            </tr>
-          </thead>
-          <tbody>
-            {filtered.map(n => (
-              <tr key={n.no} className={n.status === 'Realisasi' ? 'realisasi' : ''}>
-                <td><a className="cell-link">{n.no}</a></td>
-                <td>{n.date}</td>
-                <td>{n.notaDate}</td>
-                <td>{n.supplier}</td>
-                <td>{n.gudang}</td>
-                <td><span className={`pill ${STATUS_CLASS[n.status] || 'draft'}`}>{n.status}</span></td>
-                <td className="num mono">{fmtRp(n.total)}</td>
-                <td>
-                  <span className="row-actions">
-                    <button className="btn-icon" title="Edit">{I.edit()}</button>
-                    <button className="btn-icon" title="Print">{I.print()}</button>
-                    <button className="btn-icon del" title="Hapus">{I.trash()}</button>
-                  </span>
-                </td>
+      <div className="panel" style={{padding:0}}>
+        <div className="table-scroll">
+          <table className="data">
+            <thead>
+              <tr>
+                <th>No. Nota</th>
+                <th>Tgl. Bukti</th>
+                <th>Tgl. Nota / Sj</th>
+                <th>Pemasok</th>
+                <th>Gudang</th>
+                <th>Status</th>
+                <th className="num">Total Rp</th>
+                <th style={{width:90}}></th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filtered.map(n => (
+                <tr key={n.no} className={n.status === 'Realisasi' ? 'realisasi' : ''}>
+                  <td><a className="cell-link">{n.no}</a></td>
+                  <td>{n.date}</td>
+                  <td>{n.notaDate}</td>
+                  <td>{n.supplier}</td>
+                  <td>{n.gudang}</td>
+                  <td><span className={`pill ${STATUS_CLASS[n.status] || 'draft'}`}>{n.status}</span></td>
+                  <td className="num mono">{fmtRp(n.total)}</td>
+                  <td>
+                    <span className="row-actions">
+                      <button className="btn-icon" title="Edit">{I.edit()}</button>
+                      <button className="btn-icon" title="Print">{I.print()}</button>
+                      <button className="btn-icon del" title="Hapus">{I.trash()}</button>
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {showAdd && (
@@ -608,7 +614,7 @@ function PurchaseDashboard({ onSubChange, onNavigate }) {
         <Tile icon={I.invoice(20)} title="Nota Pembelian"  desc="Match nota ke GR & PO, kelola pembayaran dan jatuh tempo." badge="6 pending" accentColor="#0d9488" onClick={() => onSubChange('nota')} />
       </div>
 
-      <div style={{display:'grid', gridTemplateColumns:'1.4fr 1fr', gap:16, marginTop:32}}>
+      <div className="grid-responsive" style={{display:'grid', gridTemplateColumns:'1.4fr 1fr', gap:16, marginTop:32}}>
         <div className="panel">
           <h3>Aktivitas Terkini</h3>
           <div className="timeline">

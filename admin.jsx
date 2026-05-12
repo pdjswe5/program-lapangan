@@ -96,7 +96,7 @@ function FormField({ label, value, span }) {
 
 function FormGrid({ children }) {
   return (
-    <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:16, marginTop:20}}>
+    <div className="grid-responsive" style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:16, marginTop:20}}>
       {children}
     </div>
   );
@@ -137,7 +137,7 @@ function AdminDefault() {
     <>
       <AdmHeader title="Nilai Default" onEdit={()=>{}} />
       <div className="panel" style={{marginTop:0}}>
-        <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:16, marginTop:20}}>
+        <div className="grid-responsive" style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:16, marginTop:20}}>
           <div className="field">
             <label>Gudang Pembelian</label>
             <select className="select" value={d.gudangBeli} onChange={e=>setD({...d, gudangBeli:e.target.value})}>
@@ -210,7 +210,7 @@ function AdminCetakan() {
     <>
       <AdmHeader title="Keterangan Cetakan" onEdit={()=>{}} />
       <div className="panel" style={{marginTop:0}}>
-        <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:16, marginTop:20}}>
+        <div className="grid-responsive" style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:16, marginTop:20}}>
           <div className="field">
             <label>Catatan Cetakan Faktur (1)</label>
             <textarea className="input" rows={3} style={{resize:'vertical'}} value={c.faktur1} onChange={e=>setC({...c, faktur1:e.target.value})} />

@@ -139,7 +139,7 @@ function Dashboard({ onOpenList }) {
         />
       </div>
 
-      <div style={{display:'grid', gridTemplateColumns:'1.4fr 1fr', gap:16, marginTop:32}}>
+      <div className="grid-responsive" style={{display:'grid', gridTemplateColumns:'1.4fr 1fr', gap:16, marginTop:32}}>
         <div className="panel">
           <h3>Aktivitas Terkini</h3>
           <div className="timeline">
@@ -299,7 +299,7 @@ function HomeDashboard({ onNavigate }) {
         ))}
       </div>
 
-      <div style={{display:'grid', gridTemplateColumns:'1.4fr 1fr', gap:16, marginTop:32}}>
+      <div className="grid-responsive" style={{display:'grid', gridTemplateColumns:'1.4fr 1fr', gap:16, marginTop:32}}>
         <div className="panel">
           <h3>Aktivitas Terkini</h3>
           <div className="timeline">

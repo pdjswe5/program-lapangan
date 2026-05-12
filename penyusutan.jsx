@@ -34,7 +34,7 @@ function PenyusutanDashboard({ onOpenSub, onNavigate }) {
         <div className="kpi"><div className="lbl">Nilai Buku Saat Ini</div><div className="val mono">{fmtRp(totalNilaiBuku)}</div><div className="delta up">setelah penyusutan</div></div>
       </div>
 
-      <div className="tile-grid" style={{gridTemplateColumns:'1fr', marginTop:8}}>
+      <div className="tile-grid" style={{marginTop:8}}>
         <button className="tile" onClick={()=>onOpenSub('hitung')}>
           <div className="tile-head">
             <div className="tile-icon-wrap" style={{background:'#a1620714', color:'#a16207'}}>{I.chart(20)}</div>
@@ -44,7 +44,7 @@ function PenyusutanDashboard({ onOpenSub, onNavigate }) {
         </button>
       </div>
 
-      <div style={{display:'grid', gridTemplateColumns:'1.5fr 1fr', gap:16, marginTop:24}}>
+      <div className="grid-responsive" style={{display:'grid', gridTemplateColumns:'1.5fr 1fr', gap:16, marginTop:24}}>
         <div className="panel">
           <h3>Ringkasan Penyusutan per Kategori</h3>
           <div className="table-scroll">

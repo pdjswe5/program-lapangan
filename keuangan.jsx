@@ -166,7 +166,7 @@ function KeuanganDashboard({ onOpenSub, onNavigate }) {
         ))}
       </div>
 
-      <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:16, marginTop:32}}>
+      <div className="grid-responsive" style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:16, marginTop:32}}>
         <div className="panel">
           <h3>Saldo Akun</h3>
           <table className="data" style={{margin:'4px -4px'}}>
@@ -374,7 +374,7 @@ function CashModal({ data, onClose, onSave, kind }) {
       sub={isEdit ? data.deskripsi : `Catat transaksi ${labels.title.toLowerCase()} baru`}
       onClose={onClose} onSave={onSave}
       saveLabel={isEdit?'Simpan Perubahan':'Simpan & Posting'}>
-      <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:24}}>
+      <div className="grid-responsive" style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:24}}>
         <div className="form-section">
           <h4>Header Transaksi</h4>
           <div className="form-row">
@@ -473,7 +473,7 @@ function GiroModal({ data, onClose, onSave, kind }) {
       sub={isEdit?`${data.dari||data.untuk} · ${data.noGiro}`:`Catat giro ${kind==='gm'?'masuk dari pelanggan':'keluar ke supplier'}`}
       onClose={onClose} onSave={onSave}
       saveLabel={isEdit?'Simpan Perubahan':'Simpan & Posting'}>
-      <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:24}}>
+      <div className="grid-responsive" style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:24}}>
         <div className="form-section">
           <h4>Detail Giro</h4>
           <div className="form-row">
@@ -529,7 +529,7 @@ function PelunasanModal({ data, onClose, onSave, kind }) {
       sub={isEdit?(isPiutang?data.pelanggan:data.supplier):`Catat pelunasan ${isPiutang?'invoice penjualan':'bill supplier'}`}
       onClose={onClose} onSave={onSave}
       saveLabel={isEdit?'Simpan Perubahan':'Simpan & Posting'}>
-      <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:24}}>
+      <div className="grid-responsive" style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:24}}>
         <div className="form-section">
           <h4>Detail Pelunasan</h4>
           <div className="form-row">

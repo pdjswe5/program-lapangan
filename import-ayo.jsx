@@ -55,7 +55,7 @@ function ImportAYODashboard({ onOpenSub, onNavigate }) {
 
       <div className="panel" style={{marginTop:24}}>
         <h3>Panduan Import dari AYO</h3>
-        <div style={{display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:16, marginTop:12}}>
+        <div className="grid-responsive" style={{display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:16, marginTop:12}}>
           {[
             { step:'1', title:'Download dari AYO', desc:'Login ke ayo.co.id → menu Laporan → Export Excel. Pilih rentang tanggal dan klik Download.', color:'#0ea5e9' },
             { step:'2', title:'Upload ke Sini',    desc:'Klik tombol "Upload File" di atas, lalu drag & drop atau pilih file .xlsx yang baru diunduh dari AYO.', color:'#8b5cf6' },

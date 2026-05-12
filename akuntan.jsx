@@ -81,7 +81,7 @@ function AsetDashboard({ onOpenSub, onNavigate }) {
         ))}
       </div>
 
-      <div style={{display:'grid', gridTemplateColumns:'1.4fr 1fr', gap:16, marginTop:32}}>
+      <div className="grid-responsive" style={{display:'grid', gridTemplateColumns:'1.4fr 1fr', gap:16, marginTop:32}}>
         <div className="panel">
           <h3>Komposisi Aset per Kategori</h3>
           <div style={{display:'flex', flexDirection:'column', gap:10}}>
@@ -161,7 +161,7 @@ function AsetModal({ data, onClose, onSave }) {
       sub={isEdit?data.nama:'Daftarkan aset tetap baru beserta nilai dan penyusutan'}
       onClose={onClose} onSave={onSave}
       saveLabel={isEdit?'Simpan Perubahan':'Simpan Aset'}>
-      <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:24}}>
+      <div className="grid-responsive" style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:24}}>
         <div className="form-section">
           <h4>Identitas Aset</h4>
           <div className="form-row">

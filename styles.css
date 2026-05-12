@@ -898,3 +898,91 @@ kbd {
 }
 .kpi-picker-row:hover { background: var(--primary-50); }
 .toast.success { background: var(--realisasi); }
+
+/* ========== Grid & panel safeguards ========== */
+.grid-responsive { display: grid; }
+.grid-responsive > * { min-width: 0; }
+.tile-grid > * { min-width: 0; }
+.panel { min-width: 0; }
+.table-scroll { width: 100%; }
+
+/* ========== Responsive ========== */
+@media (max-width: 1024px) {
+  :root { --pad-x: 20px; }
+  .kpi-strip { grid-template-columns: repeat(2, 1fr) !important; }
+  .tile-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important; }
+  .page-head { flex-wrap: wrap; }
+  .detail-head { flex-wrap: wrap; }
+  .modal { max-width: 96vw; }
+  .form-row, .form-row-3 { grid-template-columns: 1fr 1fr; }
+  .line-items { overflow-x: auto; }
+  .topbar-search { max-width: 280px; }
+}
+
+@media (max-width: 768px) {
+  :root { --pad-x: 14px; --row-h: 48px; }
+  body { font-size: 13.5px; }
+
+  .topbar { gap: 8px; padding: 0 10px; height: 44px; }
+  .brand-name small { display: none; }
+  .topbar-search { display: none; }
+  .topbar-right { gap: 2px; }
+
+  .modnav, .multitab-nav { top: 44px; height: 38px; padding: 0 4px; }
+  .modnav button { padding: 0 10px; font-size: 12px; gap: 5px; }
+  .tab-group-label { padding: 0 8px; font-size: 12px; gap: 4px; }
+  .sub-tab { padding: 0 3px 0 8px; font-size: 12px; }
+  .sub-tab .tab-close { opacity: 1; width: 20px; height: 20px; }
+
+  .page, .page-wide { padding: 14px; }
+  .page-head { flex-direction: column; align-items: flex-start; gap: 10px; margin-bottom: 16px; }
+  .page-head h1 { font-size: 18px; }
+  .page-head .sub { font-size: 12.5px; }
+
+  .kpi-strip { grid-template-columns: 1fr !important; gap: 10px; margin-bottom: 20px; }
+  .kpi { padding: 12px 14px; }
+  .kpi .val { font-size: 18px; }
+  .kpi .spark { height: 24px; }
+
+  .tile-grid { grid-template-columns: 1fr !important; gap: 12px; }
+  .tile { padding: 16px; min-height: auto; gap: 10px; }
+  .tile-icon-wrap { width: 36px; height: 36px; border-radius: 8px; }
+  .tile h3 { font-size: 14px; }
+  .tile p { font-size: 12px; }
+
+  .filter-bar { padding: 12px; }
+  .filter-grid { grid-template-columns: 1fr !important; gap: 10px; }
+
+  .form-row, .form-row-3 { grid-template-columns: 1fr; }
+
+  .table-toolbar { flex-wrap: wrap; gap: 8px; padding: 10px 12px; }
+  .pager { flex-wrap: wrap; gap: 10px; padding: 10px 12px; }
+
+  .modal-backdrop { padding: 0; align-items: flex-end; }
+  .modal { max-width: 100%; max-height: 100vh; border-radius: 12px 12px 0 0; }
+  .modal-head { padding: 14px 16px; }
+  .modal-body { padding: 16px; }
+  .modal-foot { padding: 12px 16px; flex-wrap: wrap; gap: 10px; }
+
+  .detail-head { padding: 16px; flex-wrap: wrap; gap: 12px; }
+  .detail-head h2 { font-size: 18px; }
+
+  .panel { padding: 16px; }
+  .kv-grid { grid-template-columns: 1fr; row-gap: 4px; }
+
+  .notif-menu { width: calc(100vw - 16px); right: 8px; }
+  .burger-menu { width: calc(100vw - 16px); left: 8px; max-height: 60vh; }
+  .user-menu { width: calc(100vw - 16px); right: 8px; }
+  .search-results { position: fixed; left: 8px; right: 8px; top: 52px; }
+
+  .tabs-pills { flex-wrap: wrap; }
+
+  .grid-responsive { grid-template-columns: 1fr !important; }
+
+  .section-title { margin-bottom: 10px; }
+}
+
+@media (max-width: 480px) {
+  .modnav button, .tab-group-label, .sub-tab { padding: 0 6px; font-size: 11.5px; }
+  .topbar-left { gap: 8px; }
+}
