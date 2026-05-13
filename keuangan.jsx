@@ -13,36 +13,36 @@ const KAS_BANK_GIRO = [
 ];
 
 const KAS_MASUK = [
-  { tgl:'30-04-2026', no:'KM-2026-0118', dari:'CV Mitra Sejahtera', deskripsi:'Pelunasan invoice INV-2026-0411',  akun:'KAS BESAR',   nominal:  45200000, status:'Posted' },
-  { tgl:'29-04-2026', no:'KM-2026-0117', dari:'PT Anugerah Jaya',   deskripsi:'DP order parts April',              akun:'KAS BESAR',   nominal:  18500000, status:'Posted' },
-  { tgl:'28-04-2026', no:'KM-2026-0116', dari:'Pelanggan Tunai',    deskripsi:'Penjualan service',                 akun:'KAS KECIL 1', nominal:   3850000, status:'Posted' },
-  { tgl:'26-04-2026', no:'KM-2026-0115', dari:'PT Surya Permata',   deskripsi:'Pelunasan piutang sebagian',         akun:'KAS BESAR',   nominal:  12000000, status:'Posted' },
-  { tgl:'24-04-2026', no:'KM-2026-0114', dari:'CV Bintang Timur',   deskripsi:'Pembayaran retur',                  akun:'KAS KECIL 2', nominal:   2150000, status:'Pending' },
-  { tgl:'22-04-2026', no:'KM-2026-0113', dari:'Petty cash refund',  deskripsi:'Refund kelebihan setoran',           akun:'KAS BESAR',   nominal:    750000, status:'Posted' },
+  { tgl:'30-04-2026', no:'KM-2026-0118', perusahaan:'PT001', dari:'CV Mitra Sejahtera', deskripsi:'Pendapatan sewa lapangan April batch 1',  akun:'KAS BESAR',   nominal:  45200000, status:'Posted' },
+  { tgl:'29-04-2026', no:'KM-2026-0117', perusahaan:'PT001', dari:'Penyewa Harian',      deskripsi:'Pendapatan booking harian Padel',          akun:'KAS BESAR',   nominal:  18500000, status:'Posted' },
+  { tgl:'28-04-2026', no:'KM-2026-0116', perusahaan:'PT001', dari:'Penyewa Tunai',       deskripsi:'Penjualan minuman & snack',                 akun:'KAS KECIL 1', nominal:   3850000, status:'Posted' },
+  { tgl:'26-04-2026', no:'KM-2026-0115', perusahaan:'PT002', dari:'Member Padel SBY',    deskripsi:'Pendapatan member bulanan Surabaya',        akun:'KAS BESAR',   nominal:  12000000, status:'Posted' },
+  { tgl:'24-04-2026', no:'KM-2026-0114', perusahaan:'PT003', dari:'Turnamen Bandung FC', deskripsi:'Pendapatan turnamen Mini Soccer Bandung',   akun:'KAS KECIL 2', nominal:   2150000, status:'Pending' },
+  { tgl:'22-04-2026', no:'KM-2026-0113', perusahaan:'PT001', dari:'Refund internal',     deskripsi:'Refund kelebihan setoran petty cash',       akun:'KAS BESAR',   nominal:    750000, status:'Posted' },
 ];
 
 const KAS_KELUAR = [
-  { tgl:'30-04-2026', no:'KK-2026-0089', untuk:'PT Pemasok Inti',     deskripsi:'Pembayaran PO-2026-0418',           akun:'KAS BESAR',   nominal: 28400000, status:'Posted' },
-  { tgl:'29-04-2026', no:'KK-2026-0088', untuk:'Karyawan',            deskripsi:'Reimburse perjalanan dinas',         akun:'KAS KECIL 1', nominal:  4200000, status:'Posted' },
-  { tgl:'28-04-2026', no:'KK-2026-0087', untuk:'Vendor ATK',          deskripsi:'Pembelian alat tulis kantor',        akun:'KAS KECIL 1', nominal:  1850000, status:'Posted' },
-  { tgl:'26-04-2026', no:'KK-2026-0086', untuk:'PLN',                 deskripsi:'Pembayaran listrik April',           akun:'KAS BESAR',   nominal:  6750000, status:'Posted' },
-  { tgl:'24-04-2026', no:'KK-2026-0085', untuk:'PT Logistik Cepat',   deskripsi:'Biaya pengiriman April',             akun:'KAS BESAR',   nominal:  3200000, status:'Pending' },
+  { tgl:'30-04-2026', no:'KK-2026-0089', perusahaan:'PT001', untuk:'PT Pemasok Alat',     deskripsi:'Pembelian perlengkapan lapangan Padel',     akun:'KAS BESAR',   nominal: 28400000, status:'Posted' },
+  { tgl:'29-04-2026', no:'KK-2026-0088', perusahaan:'PT001', untuk:'Karyawan',             deskripsi:'Reimburse perjalanan dinas operasional',    akun:'KAS KECIL 1', nominal:  4200000, status:'Posted' },
+  { tgl:'28-04-2026', no:'KK-2026-0087', perusahaan:'PT001', untuk:'Vendor ATK',           deskripsi:'Pembelian alat tulis & perlengkapan admin', akun:'KAS KECIL 1', nominal:  1850000, status:'Posted' },
+  { tgl:'26-04-2026', no:'KK-2026-0086', perusahaan:'PT002', untuk:'PLN Surabaya',         deskripsi:'Pembayaran listrik lapangan April',         akun:'KAS BESAR',   nominal:  6750000, status:'Posted' },
+  { tgl:'24-04-2026', no:'KK-2026-0085', perusahaan:'PT001', untuk:'Jasa Kebersihan',      deskripsi:'Biaya kebersihan & perawatan lapangan',     akun:'KAS BESAR',   nominal:  3200000, status:'Pending' },
 ];
 
 const BANK_MASUK = [
-  { tgl:'30-04-2026', no:'BM-2026-0204', dari:'PT Anugerah Jaya',     deskripsi:'Transfer pelunasan INV-0382',        akun:'BANK BCA',  nominal: 142500000, status:'Posted' },
-  { tgl:'29-04-2026', no:'BM-2026-0203', dari:'CV Mitra Sejahtera',   deskripsi:'Pembayaran sebagian invoice',         akun:'BANK BCA',  nominal:  85000000, status:'Posted' },
-  { tgl:'29-04-2026', no:'BM-2026-0202', dari:'PT Surya Permata',     deskripsi:'Transfer SO-2026-0412',               akun:'MANDIRI',   nominal: 220000000, status:'Posted' },
-  { tgl:'27-04-2026', no:'BM-2026-0201', dari:'PT Indra Karya',       deskripsi:'Pelunasan INV-0378',                  akun:'BRI',       nominal:  68250000, status:'Posted' },
-  { tgl:'25-04-2026', no:'BM-2026-0200', dari:'Bunga deposito April',  deskripsi:'Bunga deposito BCA',                 akun:'DEPOSITO BCA', nominal: 18750000, status:'Posted' },
+  { tgl:'30-04-2026', no:'BM-2026-0204', perusahaan:'PT001', dari:'Transfer Booking Online', deskripsi:'Pendapatan booking via QRIS & transfer BCA', akun:'BANK BCA',     nominal: 142500000, status:'Posted' },
+  { tgl:'29-04-2026', no:'BM-2026-0203', perusahaan:'PT001', dari:'Member Padel Jakarta',   deskripsi:'Pembayaran paket member tahunan',             akun:'BANK BCA',     nominal:  85000000, status:'Posted' },
+  { tgl:'29-04-2026', no:'BM-2026-0202', perusahaan:'PT002', dari:'Sponsor Arena Surabaya', deskripsi:'Dana sponsor turnamen Padel Surabaya',        akun:'MANDIRI',      nominal: 220000000, status:'Posted' },
+  { tgl:'27-04-2026', no:'BM-2026-0201', perusahaan:'PT003', dari:'Komunitas Futsal Bdg',   deskripsi:'Pelunasan sewa lapangan turnamen Bandung',   akun:'BRI',          nominal:  68250000, status:'Posted' },
+  { tgl:'25-04-2026', no:'BM-2026-0200', perusahaan:'PT001', dari:'Bunga Deposito',         deskripsi:'Bunga deposito BCA April 2026',              akun:'DEPOSITO BCA', nominal:  18750000, status:'Posted' },
 ];
 
 const BANK_KELUAR = [
-  { tgl:'30-04-2026', no:'BK-2026-0156', untuk:'PT Pemasok Inti',     deskripsi:'Pembayaran PO-2026-0410',             akun:'BANK BCA', nominal: 245000000, status:'Posted' },
-  { tgl:'29-04-2026', no:'BK-2026-0155', untuk:'PT Mega Auto Parts',  deskripsi:'Pembayaran sparepart April',           akun:'BANK BCA', nominal: 128400000, status:'Posted' },
-  { tgl:'28-04-2026', no:'BK-2026-0154', untuk:'Pajak',               deskripsi:'Setoran PPN April 2026',              akun:'MANDIRI',  nominal:  92750000, status:'Posted' },
-  { tgl:'26-04-2026', no:'BK-2026-0153', untuk:'Karyawan',            deskripsi:'Payroll April 2026',                  akun:'BANK BCA', nominal: 385600000, status:'Posted' },
-  { tgl:'24-04-2026', no:'BK-2026-0152', untuk:'PT Asuransi Sentral', deskripsi:'Premi asuransi Q2',                   akun:'BRI',      nominal:  18500000, status:'Pending' },
+  { tgl:'30-04-2026', no:'BK-2026-0156', perusahaan:'PT001', untuk:'PT Sport Equipment',  deskripsi:'Pembelian bola, raket, dan net April',       akun:'BANK BCA', nominal: 245000000, status:'Posted' },
+  { tgl:'29-04-2026', no:'BK-2026-0155', perusahaan:'PT001', untuk:'Kontraktor Renovasi', deskripsi:'Biaya renovasi lantai lapangan Futsal 1',    akun:'BANK BCA', nominal: 128400000, status:'Posted' },
+  { tgl:'28-04-2026', no:'BK-2026-0154', perusahaan:'PT001', untuk:'Kantor Pajak',        deskripsi:'Setoran PPN April 2026',                     akun:'MANDIRI',  nominal:  92750000, status:'Posted' },
+  { tgl:'26-04-2026', no:'BK-2026-0153', perusahaan:'PT001', untuk:'Karyawan',            deskripsi:'Payroll April 2026 seluruh cabang Jakarta',  akun:'BANK BCA', nominal: 385600000, status:'Posted' },
+  { tgl:'24-04-2026', no:'BK-2026-0152', perusahaan:'PT002', untuk:'PT Asuransi Sentral', deskripsi:'Premi asuransi gedung Surabaya Q2',          akun:'BRI',      nominal:  18500000, status:'Pending' },
 ];
 
 const TRANSFER_MASUK = [
@@ -89,6 +89,7 @@ const PELUNASAN_HUTANG = [
 Object.assign(window, { KAS_BANK_GIRO, KAS_MASUK, KAS_KELUAR, BANK_MASUK, BANK_KELUAR, TRANSFER_MASUK, TRANSFER_KELUAR, GIRO_MASUK, GIRO_KELUAR, PELUNASAN_PIUTANG, PELUNASAN_HUTANG });
 
 const KU_SUBS = [
+  { id:'alur',  label:'Alur Kas per Perusahaan',  icon:'chart' },
   { id:'kbg',   label:'Kas, Bank & Giro',         icon:'wallet' },
   { id:'km',    label:'Kas Masuk',                 icon:'in' },
   { id:'kk',    label:'Kas Keluar',                icon:'out' },
@@ -122,6 +123,7 @@ function KeuanganDashboard({ onOpenSub, onNavigate }) {
   const giroOutKeluar = GIRO_KELUAR.filter(g=>g.status==='Outstanding').length;
 
   const tiles = [
+    { id:'alur', icon:I.chart(20),  title:'Alur Kas per Perusahaan', desc:'Lihat arus kas masuk & keluar per perusahaan dalam satu tampilan terpadu.', badge:`${(window.PERUSAHAAN||[]).length} perusahaan`, accent:'#6366f1' },
     { id:'kbg', icon:I.wallet ? I.wallet(20) : I.box(20), title:'Kas, Bank & Giro', desc:'Master akun kas, bank, dan giro beserta saldo realtime.', badge:`${KAS_BANK_GIRO.length} akun`, accent:'#0369a1' },
     { id:'km',  icon:I.arrowL(20), title:'Kas Masuk',     desc:'Pencatatan penerimaan kas dari pelanggan, tunai, atau lain-lain.',    badge:`${KAS_MASUK.length} bulan ini`, accent:'#16a34a' },
     { id:'kk',  icon:I.arrowR(20), title:'Kas Keluar',    desc:'Pengeluaran kas untuk supplier, beban operasional, dan reimburse.', badge:`${KAS_KELUAR.length} bulan ini`, accent:'#dc2626' },
@@ -599,6 +601,232 @@ function KbgModal({ data, onClose, onSave }) {
   );
 }
 
+// ─── Alur Kas per Perusahaan ────────────────────────────────────────────────
+
+function AlurKasPage() {
+  const perusahaanList = window.PERUSAHAAN || [];
+  const [ptFilter, setPtFilter] = React.useState('Semua');
+  const [jenisFilter, setJenisFilter] = React.useState('Semua');
+  const [q, setQ] = React.useState('');
+
+  const parseDMY = s => { const [d,m,y] = s.split('-'); return `${y}${m}${d}`; };
+
+  const allFlows = React.useMemo(() => [
+    ...KAS_MASUK.map(r  => ({...r, jenis:'Kas Masuk',   arah:'masuk'})),
+    ...KAS_KELUAR.map(r => ({...r, jenis:'Kas Keluar',  arah:'keluar'})),
+    ...BANK_MASUK.map(r => ({...r, jenis:'Bank Masuk',  arah:'masuk'})),
+    ...BANK_KELUAR.map(r=> ({...r, jenis:'Bank Keluar', arah:'keluar'})),
+  ].sort((a,b) => parseDMY(b.tgl).localeCompare(parseDMY(a.tgl))), []);
+
+  const filtered = allFlows.filter(r => {
+    const matchPt    = ptFilter === 'Semua' || r.perusahaan === ptFilter;
+    const matchJenis = jenisFilter === 'Semua' || r.arah === jenisFilter;
+    const matchQ     = !q || JSON.stringify(r).toLowerCase().includes(q.toLowerCase());
+    return matchPt && matchJenis && matchQ;
+  });
+
+  const totalMasuk  = filtered.filter(r => r.arah === 'masuk').reduce((s,r) => s + r.nominal, 0);
+  const totalKeluar = filtered.filter(r => r.arah === 'keluar').reduce((s,r) => s + r.nominal, 0);
+  const netFlow     = totalMasuk - totalKeluar;
+
+  const perPt = perusahaanList.map(pt => {
+    const flows  = allFlows.filter(r => r.perusahaan === pt.kode);
+    const masuk  = flows.filter(r => r.arah === 'masuk').reduce((s,r) => s + r.nominal, 0);
+    const keluar = flows.filter(r => r.arah === 'keluar').reduce((s,r) => s + r.nominal, 0);
+    return { ...pt, masuk, keluar, net: masuk - keluar, total: flows.length };
+  }).filter(pt => pt.total > 0);
+
+  const maxFlow = Math.max(...perPt.map(pt => pt.masuk + pt.keluar), 1);
+
+  return (
+    <>
+      <div className="page-head">
+        <div><h1>Alur Kas per Perusahaan</h1><div className="sub">Arus kas masuk &amp; keluar seluruh perusahaan — kas dan bank</div></div>
+        <div style={{display:'flex', gap:8}}>
+          <button className="btn btn-sm">{I.refresh()} Refresh</button>
+          <button className="btn btn-sm">{I.download()} Export</button>
+        </div>
+      </div>
+
+      <div className="kpi-strip">
+        <div className="kpi">
+          <div className="lbl">Total Kas &amp; Bank Masuk</div>
+          <div className="val mono" style={{color:'var(--realisasi)'}}>{fmtRp(totalMasuk)}</div>
+          <div className="delta up">{filtered.filter(r=>r.arah==='masuk').length} transaksi masuk</div>
+        </div>
+        <div className="kpi">
+          <div className="lbl">Total Kas &amp; Bank Keluar</div>
+          <div className="val mono" style={{color:'var(--warn)'}}>{fmtRp(totalKeluar)}</div>
+          <div className="delta down">{filtered.filter(r=>r.arah==='keluar').length} transaksi keluar</div>
+        </div>
+        <div className="kpi">
+          <div className="lbl">Net Cashflow</div>
+          <div className="val mono" style={{color: netFlow >= 0 ? 'var(--realisasi)' : 'var(--warn)'}}>
+            {netFlow >= 0 ? '+' : ''}{fmtRp(netFlow)}
+          </div>
+          <div className="delta">{ptFilter === 'Semua' ? 'semua perusahaan' : ptFilter}</div>
+        </div>
+        <div className="kpi">
+          <div className="lbl">Jumlah Transaksi</div>
+          <div className="val mono">{filtered.length}</div>
+          <div className="delta">{ptFilter === 'Semua' ? `${perPt.length} perusahaan aktif` : 'difilter'}</div>
+        </div>
+      </div>
+
+      {/* Ringkasan per perusahaan */}
+      <div className="panel" style={{marginBottom:16}}>
+        <h3>Ringkasan per Perusahaan <span className="muted" style={{fontSize:12, fontWeight:400}}>— klik baris untuk filter</span></h3>
+        <div className="table-scroll">
+          <table className="data" style={{fontSize:12.5}}>
+            <thead>
+              <tr>
+                <th>Kode</th><th>Perusahaan</th><th>Kota</th>
+                <th className="num">Masuk (Rp)</th>
+                <th className="num">Keluar (Rp)</th>
+                <th className="num">Net Flow (Rp)</th>
+                <th>Proporsi</th>
+                <th style={{width:80}}></th>
+              </tr>
+            </thead>
+            <tbody>
+              {perPt.map(pt => {
+                const pctMasuk  = ((pt.masuk  / maxFlow) * 100).toFixed(0);
+                const pctKeluar = ((pt.keluar / maxFlow) * 100).toFixed(0);
+                const isActive  = ptFilter === pt.kode;
+                return (
+                  <tr key={pt.kode} style={{cursor:'pointer', background: isActive ? 'var(--primary-50)' : undefined}} onClick={() => setPtFilter(isActive ? 'Semua' : pt.kode)}>
+                    <td className="mono">{pt.kode}</td>
+                    <td style={{fontWeight:500}}>{pt.nama}</td>
+                    <td className="muted">{pt.kota}</td>
+                    <td className="num mono" style={{color:'var(--realisasi)', fontWeight:600}}>{fmtRp(pt.masuk)}</td>
+                    <td className="num mono" style={{color:'var(--warn)'}}>{fmtRp(pt.keluar)}</td>
+                    <td className="num mono" style={{fontWeight:600, color: pt.net >= 0 ? 'var(--realisasi)' : 'var(--warn)'}}>
+                      {pt.net >= 0 ? '+' : ''}{fmtRp(pt.net)}
+                    </td>
+                    <td style={{minWidth:120}}>
+                      <div style={{display:'flex', flexDirection:'column', gap:2}}>
+                        <div style={{display:'flex', alignItems:'center', gap:4, fontSize:11}}>
+                          <span style={{color:'var(--realisasi)', width:24}}>▲</span>
+                          <div style={{flex:1, height:5, background:'var(--bg-sub)', borderRadius:999}}>
+                            <div style={{height:'100%', width:pctMasuk+'%', background:'var(--realisasi)', borderRadius:999}}/>
+                          </div>
+                        </div>
+                        <div style={{display:'flex', alignItems:'center', gap:4, fontSize:11}}>
+                          <span style={{color:'var(--warn)', width:24}}>▼</span>
+                          <div style={{flex:1, height:5, background:'var(--bg-sub)', borderRadius:999}}>
+                            <div style={{height:'100%', width:pctKeluar+'%', background:'var(--warn)', borderRadius:999}}/>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <button className={`btn btn-sm ${isActive ? 'btn-primary' : ''}`}
+                        onClick={e => { e.stopPropagation(); setPtFilter(isActive ? 'Semua' : pt.kode); }}>
+                        {isActive ? 'Reset' : 'Filter'}
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Filter bar */}
+      <div className="filter-bar">
+        <div className="filter-grid">
+          <div className="field"><label>Perusahaan</label>
+            <select className="select" value={ptFilter} onChange={e => setPtFilter(e.target.value)}>
+              <option value="Semua">Semua Perusahaan</option>
+              {perusahaanList.map(p => <option key={p.kode} value={p.kode}>{p.nama}</option>)}
+            </select>
+          </div>
+          <div className="field"><label>Jenis Arus Kas</label>
+            <select className="select" value={jenisFilter} onChange={e => setJenisFilter(e.target.value)}>
+              <option value="Semua">Semua (Masuk &amp; Keluar)</option>
+              <option value="masuk">Masuk</option>
+              <option value="keluar">Keluar</option>
+            </select>
+          </div>
+          <div className="field"><label>Cari Transaksi</label>
+            <div className="input-w-icon">{I.search(14)}<input className="input" placeholder="No. bukti, nama, deskripsi…" value={q} onChange={e => setQ(e.target.value)}/></div>
+          </div>
+          <div className="filter-actions">
+            <button className="btn" onClick={() => { setPtFilter('Semua'); setJenisFilter('Semua'); setQ(''); }}>Reset</button>
+          </div>
+        </div>
+      </div>
+
+      {/* Timeline tabel */}
+      <div className="table-card">
+        <div className="table-toolbar">
+          <div className="table-toolbar-left">
+            <b>{filtered.length}</b> transaksi
+            &nbsp;·&nbsp; Masuk <span className="mono" style={{color:'var(--realisasi)', fontWeight:600}}>{fmtRp(totalMasuk)}</span>
+            &nbsp;·&nbsp; Keluar <span className="mono" style={{color:'var(--warn)', fontWeight:600}}>{fmtRp(totalKeluar)}</span>
+            &nbsp;·&nbsp; Net <span className="mono" style={{fontWeight:600, color: netFlow >= 0 ? 'var(--realisasi)' : 'var(--warn)'}}>{netFlow>=0?'+':''}{fmtRp(netFlow)}</span>
+          </div>
+        </div>
+        <div className="table-scroll">
+          <table className="data" style={{tableLayout:'fixed', width:'100%'}}>
+            <colgroup>
+              <col style={{width:100}}/>{/* Tanggal */}
+              <col style={{width:130}}/>{/* No. Bukti */}
+              <col style={{width:100}}/>{/* Jenis */}
+              <col style={{width:72}}/>{/* Perusahaan */}
+              <col style={{width:150}}/>{/* Dari / Untuk */}
+              <col/>{/* Deskripsi — mengisi sisa lebar */}
+              <col style={{width:128}}/>{/* Masuk */}
+              <col style={{width:128}}/>{/* Keluar */}
+              <col style={{width:80}}/>{/* Status */}
+            </colgroup>
+            <thead>
+              <tr>
+                <th>Tanggal</th>
+                <th>No. Bukti</th>
+                <th>Jenis</th>
+                <th>PT</th>
+                <th>Dari / Untuk</th>
+                <th>Deskripsi</th>
+                <th className="num">Masuk (Rp)</th>
+                <th className="num">Keluar (Rp)</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.length === 0 && <tr><td colSpan={9} className="empty">Tidak ada data transaksi.</td></tr>}
+              {filtered.map((r, i) => {
+                const pt = perusahaanList.find(p => p.kode === r.perusahaan);
+                const truncStyle = {overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap'};
+                return (
+                  <tr key={i}>
+                    <td className="mono">{r.tgl}</td>
+                    <td className="mono cell-link" style={truncStyle}>{r.no}</td>
+                    <td><span className={`pill ${r.arah === 'masuk' ? 'realisasi' : 'cancelled'}`}>{r.jenis}</span></td>
+                    <td style={{fontSize:11.5}}>
+                      {pt ? <span title={pt.nama} style={{cursor:'default'}}>{pt.kode}</span> : <span className="muted">—</span>}
+                    </td>
+                    <td style={{...truncStyle, fontSize:12}} title={r.dari || r.untuk || ''}>{r.dari || r.untuk || '—'}</td>
+                    <td className="muted" style={{...truncStyle, fontSize:12}} title={r.deskripsi}>{r.deskripsi}</td>
+                    <td className="num mono" style={{color:'var(--realisasi)', fontWeight: r.arah==='masuk' ? 600 : 400}}>
+                      {r.arah === 'masuk' ? fmtRp(r.nominal) : <span className="muted">—</span>}
+                    </td>
+                    <td className="num mono" style={{color:'var(--warn)', fontWeight: r.arah==='keluar' ? 600 : 400}}>
+                      {r.arah === 'keluar' ? fmtRp(r.nominal) : <span className="muted">—</span>}
+                    </td>
+                    <td>{stPill(r.status)}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </>
+  );
+}
+
 function KeuanganPage({ activeSub, onSubChange, onNavigate }) {
   const [modal, setModal] = React.useState(null);
   const close = () => setModal(null);
@@ -636,6 +864,7 @@ function KeuanganPage({ activeSub, onSubChange, onNavigate }) {
         <span className="current">{subLabel}</span>
       </div>
 
+      {activeSub === 'alur' && <AlurKasPage />}
       {activeSub === 'kbg' && <KasBankGiro onAdd={()=>setModal({kind:'kbg'})} onEdit={(d)=>setModal({kind:'kbg', data:d})} />}
       {txMap[activeSub] && (
         <TxPage

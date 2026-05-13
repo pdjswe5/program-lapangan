@@ -1,15 +1,15 @@
 // BO (Booking Order) module
 
-const DIVISI_LIST = ['Padel', 'Mini Soccer', 'Futsal'];
-
-const LAPANGAN_MAP = {
-  'Padel':       ['Lapangan Padel 1', 'Lapangan Padel 2'],
-  'Mini Soccer': ['Lapangan Mini Soccer A'],
-  'Futsal':      ['Lapangan Futsal 1', 'Lapangan Futsal 2'],
-};
-
 const HARGA_PER_JAM = { 'Padel': 100000, 'Mini Soccer': 200000, 'Futsal': 150000 };
 const METODE_LIST   = ['Transfer BCA', 'Transfer BRI', 'Tunai', 'QRIS', 'Belum Bayar'];
+
+function getPdData(ptKode) {
+  const map = window.PERUSAHAAN_DIVISI_MAP || {};
+  return map[ptKode] || { divisi: [], lapangan: {} };
+}
+function getDivisiList(ptKode) { return getPdData(ptKode).divisi || []; }
+function getLapanganList(ptKode, divisi) { return (getPdData(ptKode).lapangan || {})[divisi] || []; }
+function getPTNama(kode) { return (window.PERUSAHAAN || []).find(p => p.kode === kode)?.nama || kode; }
 
 const SO_SUBS = [
   { id:'list',  label:'Daftar Booking' },
@@ -84,7 +84,7 @@ function SODashboard({ onOpenSub, onNavigate }) {
             <table className="data" style={{fontSize:12.5}}>
               <thead>
                 <tr>
-                  <th>No. Booking</th><th>Penyewa</th><th>Divisi</th><th>Lapangan</th><th>Tgl</th><th>Status</th>
+                  <th>No. Booking</th><th>Penyewa</th><th>Perusahaan</th><th>Divisi</th><th>Lapangan</th><th>Tgl</th><th>Status</th>
                 </tr>
               </thead>
               <tbody>
@@ -92,6 +92,7 @@ function SODashboard({ onOpenSub, onNavigate }) {
                   <tr key={b.no} onClick={()=>onOpenSub('list')}>
                     <td className="mono cell-link">{b.no}</td>
                     <td>{b.penyewa}</td>
+                    <td className="muted" style={{fontSize:11}}>{b.perusahaan || '—'}</td>
                     <td><span className={`pill ${b.divisi==='Padel'?'realisasi':b.divisi==='Futsal'?'pending':'draft'}`}>{b.divisi}</span></td>
                     <td className="muted">{b.lapangan}</td>
                     <td className="mono">{b.tgl}</td>
@@ -103,19 +104,20 @@ function SODashboard({ onOpenSub, onNavigate }) {
           </div>
         </div>
         <div className="panel">
-          <h3>Booking per Divisi</h3>
+          <h3>Booking per Perusahaan</h3>
           <div style={{display:'flex', flexDirection:'column', gap:12, marginTop:8}}>
-            {DIVISI_LIST.map(div => {
-              const cnt = bookings.filter(b=>b.divisi===div).length;
-              const pct = bookings.length ? (cnt/bookings.length)*100 : 0;
-              const col = div==='Padel'?'#10b981':div==='Futsal'?'#f59e0b':'#0ea5e9';
+            {(window.PERUSAHAAN || []).map(pt => {
+              const cnt = bookings.filter(b => b.perusahaan === pt.kode).length;
+              const pct = bookings.length ? (cnt / bookings.length) * 100 : 0;
+              if (!cnt) return null;
               return (
-                <div key={div}>
+                <div key={pt.kode}>
                   <div style={{display:'flex', justifyContent:'space-between', fontSize:12.5, marginBottom:4}}>
-                    <span>{div}</span><span className="mono muted">{cnt} booking</span>
+                    <span title={pt.nama}>{pt.kode} <span className="muted" style={{fontSize:11}}>{pt.kota}</span></span>
+                    <span className="mono muted">{cnt} booking</span>
                   </div>
                   <div style={{height:6, background:'var(--bg-sub)', borderRadius:999, overflow:'hidden'}}>
-                    <div style={{height:'100%', width:Math.max(4,pct)+'%', background:col, borderRadius:999}} />
+                    <div style={{height:'100%', width:Math.max(4,pct)+'%', background:'var(--accent)', borderRadius:999}} />
                   </div>
                 </div>
               );
@@ -131,16 +133,25 @@ function SODashboard({ onOpenSub, onNavigate }) {
 
 function SOListPage({ onAdd, onNavigate }) {
   const bookings = window.BOOKING_LIST || [];
+  const perusahaanList = window.PERUSAHAAN || [];
+  const [ptFilter, setPtFilter]       = React.useState('Semua');
   const [divisiFilter, setDivisiFilter] = React.useState('Semua');
   const [statusFilter, setStatusFilter] = React.useState('Semua');
   const [q, setQ] = React.useState('');
 
+  const divisiOptions = ptFilter === 'Semua'
+    ? [...new Set(bookings.map(b => b.divisi))]
+    : getDivisiList(ptFilter);
+
   const filtered = bookings.filter(b => {
+    const matchPt  = ptFilter === 'Semua' || b.perusahaan === ptFilter;
     const matchDiv = divisiFilter === 'Semua' || b.divisi === divisiFilter;
     const matchSt  = statusFilter === 'Semua' || b.status === statusFilter;
     const matchQ   = !q || b.penyewa.toLowerCase().includes(q.toLowerCase()) || b.no.includes(q);
-    return matchDiv && matchSt && matchQ;
+    return matchPt && matchDiv && matchSt && matchQ;
   });
+
+  const handlePtChange = (v) => { setPtFilter(v); setDivisiFilter('Semua'); };
 
   return (
     <>
@@ -153,21 +164,28 @@ function SOListPage({ onAdd, onNavigate }) {
       </div>
       <div className="filter-bar">
         <div className="filter-grid">
+          <div className="field"><label>Perusahaan</label>
+            <select className="select" value={ptFilter} onChange={e => handlePtChange(e.target.value)}>
+              <option value="Semua">Semua Perusahaan</option>
+              {perusahaanList.map(p => <option key={p.kode} value={p.kode}>{p.kode} — {p.nama}</option>)}
+            </select>
+          </div>
           <div className="field"><label>Divisi</label>
-            <select className="select" value={divisiFilter} onChange={e=>setDivisiFilter(e.target.value)}>
-              <option>Semua</option>{DIVISI_LIST.map(d=><option key={d}>{d}</option>)}
+            <select className="select" value={divisiFilter} onChange={e => setDivisiFilter(e.target.value)}>
+              <option value="Semua">Semua</option>
+              {divisiOptions.map(d => <option key={d}>{d}</option>)}
             </select>
           </div>
           <div className="field"><label>Status</label>
-            <select className="select" value={statusFilter} onChange={e=>setStatusFilter(e.target.value)}>
+            <select className="select" value={statusFilter} onChange={e => setStatusFilter(e.target.value)}>
               <option>Semua</option><option>Pending</option><option>Konfirmasi</option><option>Berjalan</option><option>Selesai</option><option>Batal</option>
             </select>
           </div>
           <div className="field"><label>Cari Penyewa / No. Booking</label>
-            <div className="input-w-icon">{I.search(14)}<input className="input" placeholder="Nama penyewa atau no. BO…" value={q} onChange={e=>setQ(e.target.value)}/></div>
+            <div className="input-w-icon">{I.search(14)}<input className="input" placeholder="Nama penyewa atau no. BO…" value={q} onChange={e => setQ(e.target.value)}/></div>
           </div>
           <div className="filter-actions">
-            <button className="btn" onClick={()=>{setDivisiFilter('Semua');setStatusFilter('Semua');setQ('');}}>Reset</button>
+            <button className="btn" onClick={() => { setPtFilter('Semua'); setDivisiFilter('Semua'); setStatusFilter('Semua'); setQ(''); }}>Reset</button>
           </div>
         </div>
       </div>
@@ -175,7 +193,8 @@ function SOListPage({ onAdd, onNavigate }) {
       <div className="table-card">
         <div className="table-toolbar">
           <div className="table-toolbar-left">
-            <b>{filtered.length}</b> booking &nbsp;·&nbsp; Total DP {fmtRp(filtered.reduce((s,b)=>s+(b.dp||0),0))}
+            <b>{filtered.length}</b> booking &nbsp;·&nbsp; Total DP {fmtRp(filtered.reduce((s,b) => s + (b.dp||0), 0))}
+            &nbsp;·&nbsp; Sisa {fmtRp(filtered.reduce((s,b) => s + (b.sisaBayar||0), 0))}
           </div>
         </div>
         <div className="table-scroll">
@@ -184,6 +203,7 @@ function SOListPage({ onAdd, onNavigate }) {
               <tr>
                 <th>No. Booking</th>
                 <th>Tanggal</th>
+                <th>Perusahaan</th>
                 <th>Divisi</th>
                 <th>Lapangan</th>
                 <th>Jam</th>
@@ -198,10 +218,14 @@ function SOListPage({ onAdd, onNavigate }) {
               </tr>
             </thead>
             <tbody>
+              {filtered.length === 0 && <tr><td colSpan={14} className="empty">Tidak ada booking yang cocok.</td></tr>}
               {filtered.map(b => (
                 <tr key={b.no}>
                   <td className="mono cell-link">{b.no}</td>
                   <td className="mono">{b.tgl}</td>
+                  <td style={{fontSize:11.5}}>
+                    <span title={getPTNama(b.perusahaan)} className="muted">{b.perusahaan || '—'}</span>
+                  </td>
                   <td><span className={`pill ${b.divisi==='Padel'?'realisasi':b.divisi==='Futsal'?'pending':'draft'}`}>{b.divisi}</span></td>
                   <td>{b.lapangan}</td>
                   <td className="mono">{b.jamMulai} – {b.jamSelesai}</td>
@@ -238,28 +262,47 @@ function SOListPage({ onAdd, onNavigate }) {
 // ─── Form Booking Baru ────────────────────────────────────────────────────────
 
 function SOFormBaru({ onSave, onCancel }) {
-  const today = new Date().toISOString().slice(0,10);
-  const emptyForm = { divisi:'Padel', lapangan:'Lapangan Padel 1', tgl:today, jamMulai:'08:00', jamSelesai:'10:00', penyewa:'', hp:'', dp:0, metode:'Transfer BCA', catatan:'' };
-  const [form, setForm] = React.useState(emptyForm);
-  const set = (k,v) => setForm(f => ({...f, [k]:v}));
+  const today          = new Date().toISOString().slice(0,10);
+  const perusahaanList = window.PERUSAHAAN || [];
+  const defaultPt      = perusahaanList[0]?.kode || 'PT001';
+  const defaultDivisi  = getDivisiList(defaultPt)[0] || 'Padel';
+  const defaultLapangan= getLapanganList(defaultPt, defaultDivisi)[0] || '';
+
+  const [form, setForm] = React.useState({
+    perusahaan: defaultPt, divisi: defaultDivisi, lapangan: defaultLapangan,
+    tgl: today, jamMulai: '08:00', jamSelesai: '10:00',
+    penyewa: '', hp: '', dp: 0, metode: 'Transfer BCA', catatan: '',
+  });
+  const set = (k, v) => setForm(f => ({...f, [k]: v}));
+
+  const handlePerusahaan = (kode) => {
+    const divisi   = getDivisiList(kode)[0] || '';
+    const lapangan = getLapanganList(kode, divisi)[0] || '';
+    setForm(f => ({...f, perusahaan: kode, divisi, lapangan}));
+  };
+
+  const handleDivisi = (v) => {
+    const lapangan = getLapanganList(form.perusahaan, v)[0] || '';
+    setForm(f => ({...f, divisi: v, lapangan}));
+  };
+
+  const divisiList  = getDivisiList(form.perusahaan);
+  const lapanganList= getLapanganList(form.perusahaan, form.divisi);
 
   const hargaPerJam = HARGA_PER_JAM[form.divisi] || 0;
   const durasi      = calcDurasi(form.jamMulai, form.jamSelesai);
   const totalHarga  = durasi * hargaPerJam;
   const sisaBayar   = Math.max(0, totalHarga - (form.dp || 0));
 
-  const handleDivisi = (v) => {
-    const lap = (LAPANGAN_MAP[v]||[])[0] || '';
-    setForm(f => ({...f, divisi:v, lapangan:lap}));
-  };
-
   const handleSubmit = () => {
-    if (!form.tgl || !form.penyewa || !form.hp) {
-      window.__erpToast && window.__erpToast('Lengkapi tanggal, nama penyewa, dan no. HP terlebih dahulu.');
+    if (!form.perusahaan || !form.tgl || !form.penyewa || !form.hp) {
+      window.__erpToast && window.__erpToast('Lengkapi perusahaan, tanggal, nama penyewa, dan no. HP.');
       return;
     }
-    onSave({ ...form, hargaPerJam, durasi, totalHarga, sisaBayar, status:'Pending' });
+    onSave({ ...form, hargaPerJam, durasi, totalHarga, sisaBayar, status: 'Pending' });
   };
+
+  const ptInfo = perusahaanList.find(p => p.kode === form.perusahaan);
 
   return (
     <>
@@ -274,25 +317,43 @@ function SOFormBaru({ onSave, onCancel }) {
       <div className="grid-responsive" style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:24, maxWidth:960}}>
         <div className="form-section panel">
           <h4>Detail Lapangan</h4>
+
+          <div className="field"><label>Perusahaan *</label>
+            <select className="select" value={form.perusahaan} onChange={e => handlePerusahaan(e.target.value)}>
+              {perusahaanList.map(p => <option key={p.kode} value={p.kode}>{p.kode} — {p.nama}</option>)}
+            </select>
+            {ptInfo && <div className="muted" style={{fontSize:11.5, marginTop:4}}>{ptInfo.kota} · {ptInfo.telp}</div>}
+          </div>
+
           <div className="field"><label>Divisi *</label>
-            <select className="select" value={form.divisi} onChange={e=>handleDivisi(e.target.value)}>
-              {DIVISI_LIST.map(d=><option key={d}>{d}</option>)}
+            <select className="select" value={form.divisi} onChange={e => handleDivisi(e.target.value)}
+              disabled={divisiList.length === 0}>
+              {divisiList.length === 0
+                ? <option value="">— Tidak ada divisi —</option>
+                : divisiList.map(d => <option key={d}>{d}</option>)
+              }
             </select>
           </div>
+
           <div className="field"><label>Lapangan *</label>
-            <select className="select" value={form.lapangan} onChange={e=>set('lapangan',e.target.value)}>
-              {(LAPANGAN_MAP[form.divisi]||[]).map(l=><option key={l}>{l}</option>)}
+            <select className="select" value={form.lapangan} onChange={e => set('lapangan', e.target.value)}
+              disabled={lapanganList.length === 0}>
+              {lapanganList.length === 0
+                ? <option value="">— Pilih divisi dulu —</option>
+                : lapanganList.map(l => <option key={l}>{l}</option>)
+              }
             </select>
           </div>
+
           <div className="field"><label>Tanggal Booking *</label>
-            <input className="input" type="date" value={form.tgl} onChange={e=>set('tgl',e.target.value)}/>
+            <input className="input" type="date" value={form.tgl} onChange={e => set('tgl', e.target.value)}/>
           </div>
           <div className="form-row">
             <div className="field"><label>Jam Mulai</label>
-              <input className="input mono" type="time" value={form.jamMulai} onChange={e=>set('jamMulai',e.target.value)}/>
+              <input className="input mono" type="time" value={form.jamMulai} onChange={e => set('jamMulai', e.target.value)}/>
             </div>
             <div className="field"><label>Jam Selesai</label>
-              <input className="input mono" type="time" value={form.jamSelesai} onChange={e=>set('jamSelesai',e.target.value)}/>
+              <input className="input mono" type="time" value={form.jamSelesai} onChange={e => set('jamSelesai', e.target.value)}/>
             </div>
           </div>
           <div style={{background:'var(--bg-sub)', borderRadius:8, padding:'10px 14px', fontSize:13, color:'var(--text-2)'}}>
@@ -311,18 +372,18 @@ function SOFormBaru({ onSave, onCancel }) {
         <div className="form-section panel">
           <h4>Data Penyewa &amp; Pembayaran</h4>
           <div className="field"><label>Nama Penyewa *</label>
-            <input className="input" value={form.penyewa} onChange={e=>set('penyewa',e.target.value)} placeholder="Nama lengkap / nama tim…"/>
+            <input className="input" value={form.penyewa} onChange={e => set('penyewa', e.target.value)} placeholder="Nama lengkap / nama tim…"/>
           </div>
           <div className="field"><label>No. HP *</label>
-            <input className="input mono" value={form.hp} onChange={e=>set('hp',e.target.value)} placeholder="08xx-xxxx-xxxx"/>
+            <input className="input mono" value={form.hp} onChange={e => set('hp', e.target.value)} placeholder="08xx-xxxx-xxxx"/>
           </div>
           <div className="field"><label>Metode Pembayaran</label>
-            <select className="select" value={form.metode} onChange={e=>set('metode',e.target.value)}>
-              {METODE_LIST.map(m=><option key={m}>{m}</option>)}
+            <select className="select" value={form.metode} onChange={e => set('metode', e.target.value)}>
+              {METODE_LIST.map(m => <option key={m}>{m}</option>)}
             </select>
           </div>
           <div className="field"><label>Down Payment / DP (Rp)</label>
-            <input className="input mono" type="number" value={form.dp} onChange={e=>set('dp',+e.target.value)} min={0}/>
+            <input className="input mono" type="number" value={form.dp} onChange={e => set('dp', +e.target.value)} min={0}/>
           </div>
           <div style={{background:'var(--bg-sub)', borderRadius:8, padding:'10px 14px', fontSize:13}}>
             <div style={{display:'flex', justifyContent:'space-between', marginBottom:4, color:'var(--text-2)'}}>
@@ -336,7 +397,7 @@ function SOFormBaru({ onSave, onCancel }) {
             </div>
           </div>
           <div className="field" style={{marginTop:8}}><label>Catatan</label>
-            <textarea className="textarea" value={form.catatan} onChange={e=>set('catatan',e.target.value)} placeholder="Catatan tambahan…" rows={3}/>
+            <textarea className="textarea" value={form.catatan} onChange={e => set('catatan', e.target.value)} placeholder="Catatan tambahan…" rows={3}/>
           </div>
         </div>
       </div>

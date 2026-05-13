@@ -9,6 +9,44 @@ const PERUSAHAAN = [
   { kode:'CV001', nama:'CV Sport Center Mandiri',     kota:'Tangerang', telp:'021-5551005' },
 ];
 
+// ─── Mapping Perusahaan → Divisi → Lapangan ───────────────────────────────
+const PERUSAHAAN_DIVISI_MAP = {
+  'PT001': {
+    divisi: ['Padel', 'Mini Soccer', 'Futsal'],
+    lapangan: {
+      'Padel':       ['Lapangan Padel 1', 'Lapangan Padel 2'],
+      'Mini Soccer': ['Lapangan Mini Soccer A'],
+      'Futsal':      ['Lapangan Futsal 1', 'Lapangan Futsal 2'],
+    },
+  },
+  'PT002': {
+    divisi: ['Padel'],
+    lapangan: {
+      'Padel': ['Arena Padel Surabaya 1', 'Arena Padel Surabaya 2'],
+    },
+  },
+  'PT003': {
+    divisi: ['Mini Soccer', 'Futsal'],
+    lapangan: {
+      'Mini Soccer': ['Mini Soccer Bandung A', 'Mini Soccer Bandung B'],
+      'Futsal':      ['Futsal Bandung 1'],
+    },
+  },
+  'PT004': {
+    divisi: ['Futsal'],
+    lapangan: {
+      'Futsal': ['Futsal Semarang Utama', 'Futsal Semarang 2'],
+    },
+  },
+  'CV001': {
+    divisi: ['Padel', 'Futsal'],
+    lapangan: {
+      'Padel':  ['Padel Tangerang 1'],
+      'Futsal': ['Futsal Tangerang A'],
+    },
+  },
+};
+
 // ─── Supplier / Pemasok ───────────────────────────────────────────────────
 const SUPPLIERS = [
   { code:'S001', name:'PT Sport Equipment Indonesia', city:'Jakarta',   phone:'021-5552001' },
@@ -78,24 +116,24 @@ const BARANG = [
 ];
 
 // ─── Booking / SO List ────────────────────────────────────────────────────
-// Fields: no, tgl, divisi, lapangan, jamMulai, jamSelesai, durasi (jam),
+// Fields: no, perusahaan, tgl, divisi, lapangan, jamMulai, jamSelesai, durasi (jam),
 //         hargaPerJam, totalHarga, dp (down payment), sisaBayar, metode, penyewa, hp, status, catatan
 const BOOKING_LIST = [
-  { no:'BO-2026-0042', tgl:'12-05-2026', divisi:'Padel',       lapangan:'Lapangan Padel 1',       jamMulai:'08:00', jamSelesai:'10:00', durasi:2,   hargaPerJam:100000, totalHarga:200000, dp:100000, sisaBayar:100000, metode:'Transfer BCA', penyewa:'Reza Permana',        hp:'0812-3001-001', status:'Konfirmasi', catatan:'' },
-  { no:'BO-2026-0041', tgl:'12-05-2026', divisi:'Futsal',      lapangan:'Lapangan Futsal 1',       jamMulai:'10:00', jamSelesai:'12:00', durasi:2,   hargaPerJam:150000, totalHarga:300000, dp:150000, sisaBayar:150000, metode:'Transfer BCA', penyewa:'Bima Sakti',          hp:'0812-3001-002', status:'Konfirmasi', catatan:'Kompetisi internal' },
-  { no:'BO-2026-0040', tgl:'12-05-2026', divisi:'Padel',       lapangan:'Lapangan Padel 2',        jamMulai:'14:00', jamSelesai:'16:00', durasi:2,   hargaPerJam:100000, totalHarga:200000, dp:200000, sisaBayar:     0, metode:'Tunai',        penyewa:'Diana Putri',         hp:'0812-3001-003', status:'Berjalan',   catatan:'Bawa raket sendiri' },
-  { no:'BO-2026-0039', tgl:'12-05-2026', divisi:'Mini Soccer', lapangan:'Lapangan Mini Soccer A',  jamMulai:'16:00', jamSelesai:'17:30', durasi:1.5, hargaPerJam:200000, totalHarga:300000, dp:150000, sisaBayar:150000, metode:'QRIS',         penyewa:'Tim Matahari FC',     hp:'0812-3001-004', status:'Pending',    catatan:'Tim 7 orang, minta rompi' },
-  { no:'BO-2026-0038', tgl:'11-05-2026', divisi:'Futsal',      lapangan:'Lapangan Futsal 2',       jamMulai:'18:00', jamSelesai:'20:00', durasi:2,   hargaPerJam:150000, totalHarga:300000, dp:300000, sisaBayar:     0, metode:'Transfer BRI', penyewa:'Komunitas Futsal SBY',hp:'0812-3001-005', status:'Selesai',    catatan:'' },
-  { no:'BO-2026-0037', tgl:'11-05-2026', divisi:'Padel',       lapangan:'Lapangan Padel 1',        jamMulai:'07:00', jamSelesai:'09:00', durasi:2,   hargaPerJam:100000, totalHarga:200000, dp:200000, sisaBayar:     0, metode:'Tunai',        penyewa:'Kevin Sanjaya',       hp:'0812-3001-006', status:'Selesai',    catatan:'' },
-  { no:'BO-2026-0036', tgl:'11-05-2026', divisi:'Padel',       lapangan:'Lapangan Padel 2',        jamMulai:'10:00', jamSelesai:'12:00', durasi:2,   hargaPerJam:100000, totalHarga:200000, dp:100000, sisaBayar:100000, metode:'Transfer BCA', penyewa:'Lisa Halim',          hp:'0812-3001-007', status:'Selesai',    catatan:'' },
-  { no:'BO-2026-0035', tgl:'10-05-2026', divisi:'Mini Soccer', lapangan:'Lapangan Mini Soccer A',  jamMulai:'09:00', jamSelesai:'11:00', durasi:2,   hargaPerJam:200000, totalHarga:400000, dp:200000, sisaBayar:200000, metode:'QRIS',         penyewa:'FC Bintang Jaya',     hp:'0812-3001-008', status:'Selesai',    catatan:'Turnamen kecil 14 orang' },
-  { no:'BO-2026-0034', tgl:'10-05-2026', divisi:'Futsal',      lapangan:'Lapangan Futsal 1',       jamMulai:'14:00', jamSelesai:'16:00', durasi:2,   hargaPerJam:150000, totalHarga:300000, dp:300000, sisaBayar:     0, metode:'Transfer BCA', penyewa:'Gita Permadi',        hp:'0812-3001-009', status:'Selesai',    catatan:'' },
-  { no:'BO-2026-0033', tgl:'09-05-2026', divisi:'Padel',       lapangan:'Lapangan Padel 1',        jamMulai:'08:00', jamSelesai:'10:00', durasi:2,   hargaPerJam:100000, totalHarga:200000, dp:100000, sisaBayar:100000, metode:'Transfer BRI', penyewa:'Andre Taulany',       hp:'0812-3001-010', status:'Selesai',    catatan:'' },
-  { no:'BO-2026-0032', tgl:'09-05-2026', divisi:'Futsal',      lapangan:'Lapangan Futsal 2',       jamMulai:'20:00', jamSelesai:'22:00', durasi:2,   hargaPerJam:150000, totalHarga:300000, dp:150000, sisaBayar:150000, metode:'Transfer BCA', penyewa:'Juventus FC Indo',    hp:'0812-3001-011', status:'Batal',      catatan:'Dibatalkan, DP dikembalikan 50%' },
-  { no:'BO-2026-0031', tgl:'13-05-2026', divisi:'Padel',       lapangan:'Lapangan Padel 1',        jamMulai:'10:00', jamSelesai:'12:00', durasi:2,   hargaPerJam:100000, totalHarga:200000, dp:     0, sisaBayar:200000, metode:'Belum Bayar',  penyewa:'Stevani Lee',         hp:'0812-3001-012', status:'Pending',    catatan:'Booking via WhatsApp' },
-  { no:'BO-2026-0030', tgl:'13-05-2026', divisi:'Futsal',      lapangan:'Lapangan Futsal 1',       jamMulai:'15:00', jamSelesai:'17:00', durasi:2,   hargaPerJam:150000, totalHarga:300000, dp:150000, sisaBayar:150000, metode:'Transfer BCA', penyewa:'Komunitas Sehat',     hp:'0812-3001-013', status:'Pending',    catatan:'' },
-  { no:'BO-2026-0029', tgl:'14-05-2026', divisi:'Padel',       lapangan:'Lapangan Padel 2',        jamMulai:'06:00', jamSelesai:'08:00', durasi:2,   hargaPerJam:100000, totalHarga:200000, dp:100000, sisaBayar:100000, metode:'QRIS',         penyewa:'Andika Firmansyah',   hp:'0812-3001-014', status:'Konfirmasi', catatan:'Booking rutin setiap Rabu' },
-  { no:'BO-2026-0028', tgl:'14-05-2026', divisi:'Mini Soccer', lapangan:'Lapangan Mini Soccer A',  jamMulai:'13:00', jamSelesai:'15:00', durasi:2,   hargaPerJam:200000, totalHarga:400000, dp:200000, sisaBayar:200000, metode:'Transfer BCA', penyewa:'Tim Garuda Muda',     hp:'0812-3001-015', status:'Konfirmasi', catatan:'12 pemain hadir' },
+  { no:'BO-2026-0042', perusahaan:'PT001', tgl:'12-05-2026', divisi:'Padel',       lapangan:'Lapangan Padel 1',       jamMulai:'08:00', jamSelesai:'10:00', durasi:2,   hargaPerJam:100000, totalHarga:200000, dp:100000, sisaBayar:100000, metode:'Transfer BCA', penyewa:'Reza Permana',        hp:'0812-3001-001', status:'Konfirmasi', catatan:'' },
+  { no:'BO-2026-0041', perusahaan:'PT001', tgl:'12-05-2026', divisi:'Futsal',      lapangan:'Lapangan Futsal 1',       jamMulai:'10:00', jamSelesai:'12:00', durasi:2,   hargaPerJam:150000, totalHarga:300000, dp:150000, sisaBayar:150000, metode:'Transfer BCA', penyewa:'Bima Sakti',          hp:'0812-3001-002', status:'Konfirmasi', catatan:'Kompetisi internal' },
+  { no:'BO-2026-0040', perusahaan:'PT001', tgl:'12-05-2026', divisi:'Padel',       lapangan:'Lapangan Padel 2',        jamMulai:'14:00', jamSelesai:'16:00', durasi:2,   hargaPerJam:100000, totalHarga:200000, dp:200000, sisaBayar:     0, metode:'Tunai',        penyewa:'Diana Putri',         hp:'0812-3001-003', status:'Berjalan',   catatan:'Bawa raket sendiri' },
+  { no:'BO-2026-0039', perusahaan:'PT001', tgl:'12-05-2026', divisi:'Mini Soccer', lapangan:'Lapangan Mini Soccer A',  jamMulai:'16:00', jamSelesai:'17:30', durasi:1.5, hargaPerJam:200000, totalHarga:300000, dp:150000, sisaBayar:150000, metode:'QRIS',         penyewa:'Tim Matahari FC',     hp:'0812-3001-004', status:'Pending',    catatan:'Tim 7 orang, minta rompi' },
+  { no:'BO-2026-0038', perusahaan:'PT001', tgl:'11-05-2026', divisi:'Futsal',      lapangan:'Lapangan Futsal 2',       jamMulai:'18:00', jamSelesai:'20:00', durasi:2,   hargaPerJam:150000, totalHarga:300000, dp:300000, sisaBayar:     0, metode:'Transfer BRI', penyewa:'Komunitas Futsal SBY',hp:'0812-3001-005', status:'Selesai',    catatan:'' },
+  { no:'BO-2026-0037', perusahaan:'PT001', tgl:'11-05-2026', divisi:'Padel',       lapangan:'Lapangan Padel 1',        jamMulai:'07:00', jamSelesai:'09:00', durasi:2,   hargaPerJam:100000, totalHarga:200000, dp:200000, sisaBayar:     0, metode:'Tunai',        penyewa:'Kevin Sanjaya',       hp:'0812-3001-006', status:'Selesai',    catatan:'' },
+  { no:'BO-2026-0036', perusahaan:'PT001', tgl:'11-05-2026', divisi:'Padel',       lapangan:'Lapangan Padel 2',        jamMulai:'10:00', jamSelesai:'12:00', durasi:2,   hargaPerJam:100000, totalHarga:200000, dp:100000, sisaBayar:100000, metode:'Transfer BCA', penyewa:'Lisa Halim',          hp:'0812-3001-007', status:'Selesai',    catatan:'' },
+  { no:'BO-2026-0035', perusahaan:'PT001', tgl:'10-05-2026', divisi:'Mini Soccer', lapangan:'Lapangan Mini Soccer A',  jamMulai:'09:00', jamSelesai:'11:00', durasi:2,   hargaPerJam:200000, totalHarga:400000, dp:200000, sisaBayar:200000, metode:'QRIS',         penyewa:'FC Bintang Jaya',     hp:'0812-3001-008', status:'Selesai',    catatan:'Turnamen kecil 14 orang' },
+  { no:'BO-2026-0034', perusahaan:'PT001', tgl:'10-05-2026', divisi:'Futsal',      lapangan:'Lapangan Futsal 1',       jamMulai:'14:00', jamSelesai:'16:00', durasi:2,   hargaPerJam:150000, totalHarga:300000, dp:300000, sisaBayar:     0, metode:'Transfer BCA', penyewa:'Gita Permadi',        hp:'0812-3001-009', status:'Selesai',    catatan:'' },
+  { no:'BO-2026-0033', perusahaan:'PT001', tgl:'09-05-2026', divisi:'Padel',       lapangan:'Lapangan Padel 1',        jamMulai:'08:00', jamSelesai:'10:00', durasi:2,   hargaPerJam:100000, totalHarga:200000, dp:100000, sisaBayar:100000, metode:'Transfer BRI', penyewa:'Andre Taulany',       hp:'0812-3001-010', status:'Selesai',    catatan:'' },
+  { no:'BO-2026-0032', perusahaan:'PT001', tgl:'09-05-2026', divisi:'Futsal',      lapangan:'Lapangan Futsal 2',       jamMulai:'20:00', jamSelesai:'22:00', durasi:2,   hargaPerJam:150000, totalHarga:300000, dp:150000, sisaBayar:150000, metode:'Transfer BCA', penyewa:'Juventus FC Indo',    hp:'0812-3001-011', status:'Batal',      catatan:'Dibatalkan, DP dikembalikan 50%' },
+  { no:'BO-2026-0031', perusahaan:'PT001', tgl:'13-05-2026', divisi:'Padel',       lapangan:'Lapangan Padel 1',        jamMulai:'10:00', jamSelesai:'12:00', durasi:2,   hargaPerJam:100000, totalHarga:200000, dp:     0, sisaBayar:200000, metode:'Belum Bayar',  penyewa:'Stevani Lee',         hp:'0812-3001-012', status:'Pending',    catatan:'Booking via WhatsApp' },
+  { no:'BO-2026-0030', perusahaan:'PT001', tgl:'13-05-2026', divisi:'Futsal',      lapangan:'Lapangan Futsal 1',       jamMulai:'15:00', jamSelesai:'17:00', durasi:2,   hargaPerJam:150000, totalHarga:300000, dp:150000, sisaBayar:150000, metode:'Transfer BCA', penyewa:'Komunitas Sehat',     hp:'0812-3001-013', status:'Pending',    catatan:'' },
+  { no:'BO-2026-0029', perusahaan:'PT001', tgl:'14-05-2026', divisi:'Padel',       lapangan:'Lapangan Padel 2',        jamMulai:'06:00', jamSelesai:'08:00', durasi:2,   hargaPerJam:100000, totalHarga:200000, dp:100000, sisaBayar:100000, metode:'QRIS',         penyewa:'Andika Firmansyah',   hp:'0812-3001-014', status:'Konfirmasi', catatan:'Booking rutin setiap Rabu' },
+  { no:'BO-2026-0028', perusahaan:'PT001', tgl:'14-05-2026', divisi:'Mini Soccer', lapangan:'Lapangan Mini Soccer A',  jamMulai:'13:00', jamSelesai:'15:00', durasi:2,   hargaPerJam:200000, totalHarga:400000, dp:200000, sisaBayar:200000, metode:'Transfer BCA', penyewa:'Tim Garuda Muda',     hp:'0812-3001-015', status:'Konfirmasi', catatan:'12 pemain hadir' },
 ];
 
 // ─── Riwayat Bagi Hasil ───────────────────────────────────────────────────
@@ -140,7 +178,7 @@ const fmtRp  = (n) => 'Rp ' + (n || 0).toLocaleString('id-ID');
 const fmtNum = (n) => (n || 0).toLocaleString('id-ID');
 
 Object.assign(window, {
-  PERUSAHAAN, SUPPLIERS, TENANTS, ASET, BARANG,
+  PERUSAHAAN, PERUSAHAAN_DIVISI_MAP, SUPPLIERS, TENANTS, ASET, BARANG,
   BOOKING_LIST, BAGI_HASIL, PO_LIST,
   STATUSES, STATUS_CLASS, fmtRp, fmtNum,
 });
