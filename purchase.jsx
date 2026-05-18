@@ -285,6 +285,7 @@ function OrderPembelian({ onNavigate, onBack }) {
   const [search,       setSearch]       = React.useState('');
   const [statusFilter, setStatusFilter] = React.useState('');
   const [showAdd,      setShowAdd]      = React.useState(false);
+  const [selectedPO,   setSelectedPO]   = React.useState(null);
 
   const [date,     setDate]     = React.useState('2026-04-30');
   const [ref,      setRef]      = React.useState('');
@@ -339,7 +340,7 @@ function OrderPembelian({ onNavigate, onBack }) {
             </thead>
             <tbody>
               {filtered.map(p => (
-                <tr key={p.no}>
+                <tr key={p.no} style={{cursor:'pointer'}} onClick={() => setSelectedPO(p)}>
                   <td><a className="cell-link">{p.no}</a></td>
                   <td>{p.date}</td>
                   <td>{p.supplier}</td>
@@ -347,9 +348,9 @@ function OrderPembelian({ onNavigate, onBack }) {
                   <td><span className={`pill ${STATUS_CLASS[p.status] || 'draft'}`}>{p.status}</span></td>
                   <td>{p.due}</td>
                   <td className="num mono">{fmtRp(p.total)}</td>
-                  <td>
+                  <td onClick={e => e.stopPropagation()}>
                     <span className="row-actions">
-                      <button className="btn-icon" title="Edit">{I.edit()}</button>
+                      <button className="btn-icon" title="Edit" onClick={() => setSelectedPO(p)}>{I.edit()}</button>
                       <button className="btn-icon" title="Print">{I.print()}</button>
                       <button className="btn-icon del" title="Hapus">{I.trash()}</button>
                     </span>
@@ -406,6 +407,51 @@ function OrderPembelian({ onNavigate, onBack }) {
           </div>
         </div>
       )}
+
+      {selectedPO && (
+        <div className="modal-backdrop" onClick={() => setSelectedPO(null)}>
+          <div className="modal" onClick={e => e.stopPropagation()}>
+            <div className="modal-head">
+              <div>
+                <h2>Detail Order Pembelian — {selectedPO.no}</h2>
+                <div className="sub">{selectedPO.supplier} · <span className={`pill ${STATUS_CLASS[selectedPO.status] || 'draft'}`}>{selectedPO.status}</span></div>
+              </div>
+              <button className="btn btn-icon" onClick={() => setSelectedPO(null)}>{I.x(16)}</button>
+            </div>
+            <div className="modal-body">
+              <div className="form-grid">
+                <div className="form-section">
+                  <h4>Informasi Umum</h4>
+                  <div className="form-row">
+                    <div className="field"><label>Tgl. Bukti</label><input className="input" type="date" defaultValue={selectedPO.date} readOnly /></div>
+                    <div className="field"><label>No. Referensi</label><input className="input mono" value={selectedPO.ref} readOnly /></div>
+                  </div>
+                  <div className="field">
+                    <label>Pemasok</label>
+                    <input className="input" value={selectedPO.supplier} readOnly />
+                  </div>
+                  <div className="form-row">
+                    <div className="field"><label>Jth. Tempo</label><input className="input" value={selectedPO.due} readOnly /></div>
+                    <div className="field"><label>Total</label><input className="input mono" value={fmtRp(selectedPO.total)} readOnly /></div>
+                  </div>
+                  <div className="field"><label>Catatan</label><textarea className="textarea" value={selectedPO.notes || ''} readOnly /></div>
+                </div>
+                <PurchTotalsCard lines={[]} />
+              </div>
+              <div style={{marginTop:20}}>
+                <PurchItemTable lines={[]} setLines={()=>{}} hasRealisasi={true} />
+              </div>
+            </div>
+            <div className="modal-foot">
+              <div className="muted" style={{fontSize:12.5}}><kbd>Esc</kbd> untuk menutup</div>
+              <div className="right">
+                <button className="btn" onClick={() => setSelectedPO(null)}>Tutup</button>
+                <button className="btn btn-primary" onClick={() => { setSelectedPO(null); window.__erpToast && window.__erpToast('Perubahan berhasil disimpan.'); }}>{I.check()} Simpan Perubahan</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -413,8 +459,9 @@ function OrderPembelian({ onNavigate, onBack }) {
 // ─── Sub-screen 3: Nota Pembelian ─────────────────────────────────────────────
 
 function NotaPembelian({ onNavigate, onBack }) {
-  const [search,  setSearch]  = React.useState('');
-  const [showAdd, setShowAdd] = React.useState(false);
+  const [search,      setSearch]      = React.useState('');
+  const [showAdd,     setShowAdd]     = React.useState(false);
+  const [selectedNota, setSelectedNota] = React.useState(null);
 
   const [dateBukti,    setDateBukti]    = React.useState('2026-04-30');
   const [noPO,         setNoPO]         = React.useState('');
@@ -466,7 +513,7 @@ function NotaPembelian({ onNavigate, onBack }) {
             </thead>
             <tbody>
             {filtered.map(n => (
-              <tr key={n.no}>
+              <tr key={n.no} style={{cursor:'pointer'}} onClick={() => setSelectedNota(n)}>
                 <td><a className="cell-link">{n.no}</a></td>
                   <td>{n.date}</td>
                   <td>{n.notaDate}</td>
@@ -474,9 +521,9 @@ function NotaPembelian({ onNavigate, onBack }) {
                   <td>{n.gudang}</td>
                   <td><span className={`pill ${STATUS_CLASS[n.status] || 'draft'}`}>{n.status}</span></td>
                   <td className="num mono">{fmtRp(n.total)}</td>
-                  <td>
+                  <td onClick={e => e.stopPropagation()}>
                     <span className="row-actions">
-                      <button className="btn-icon" title="Edit">{I.edit()}</button>
+                      <button className="btn-icon" title="Edit" onClick={() => setSelectedNota(n)}>{I.edit()}</button>
                       <button className="btn-icon" title="Print">{I.print()}</button>
                       <button className="btn-icon del" title="Hapus">{I.trash()}</button>
                     </span>
@@ -557,6 +604,47 @@ function NotaPembelian({ onNavigate, onBack }) {
               <div className="right">
                 <button className="btn" onClick={handleClose}>Batal</button>
                 <button className="btn btn-primary" onClick={handleSave}>{I.check()} Simpan Nota</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {selectedNota && (
+        <div className="modal-backdrop" onClick={() => setSelectedNota(null)}>
+          <div className="modal" onClick={e => e.stopPropagation()}>
+            <div className="modal-head">
+              <div>
+                <h2>Detail Nota Pembelian — {selectedNota.no}</h2>
+                <div className="sub">{selectedNota.supplier} · <span className={`pill ${STATUS_CLASS[selectedNota.status] || 'draft'}`}>{selectedNota.status}</span></div>
+              </div>
+              <button className="btn btn-icon" onClick={() => setSelectedNota(null)}>{I.x(16)}</button>
+            </div>
+            <div className="modal-body">
+              <div className="form-grid">
+                <div className="form-section">
+                  <h4>Informasi Nota</h4>
+                  <div className="form-row">
+                    <div className="field"><label>Tgl. Bukti</label><input className="input" value={selectedNota.date} readOnly /></div>
+                    <div className="field"><label>Tgl. Nota / Sj</label><input className="input" value={selectedNota.notaDate} readOnly /></div>
+                  </div>
+                  <div className="field"><label>Pemasok</label><input className="input" value={selectedNota.supplier} readOnly /></div>
+                  <div className="form-row">
+                    <div className="field"><label>Gudang</label><input className="input" value={selectedNota.gudang} readOnly /></div>
+                    <div className="field"><label>Total</label><input className="input mono" value={fmtRp(selectedNota.total)} readOnly /></div>
+                  </div>
+                </div>
+                <PurchTotalsCard lines={[]} />
+              </div>
+              <div style={{marginTop:20}}>
+                <PurchItemTable lines={[]} setLines={()=>{}} hasRealisasi={false} />
+              </div>
+            </div>
+            <div className="modal-foot">
+              <div className="muted" style={{fontSize:12.5}}><kbd>Esc</kbd> untuk menutup</div>
+              <div className="right">
+                <button className="btn" onClick={() => setSelectedNota(null)}>Tutup</button>
+                <button className="btn btn-primary" onClick={() => { setSelectedNota(null); window.__erpToast && window.__erpToast('Perubahan berhasil disimpan.'); }}>{I.check()} Simpan Perubahan</button>
               </div>
             </div>
           </div>

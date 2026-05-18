@@ -587,7 +587,7 @@ function MutasiModal({ data, onClose, onSave }) {
 
         <h4 style={{marginTop:14}}>Item yang Dimutasi <span style={{float:'right', fontWeight:400, fontSize:11.5, textTransform:'none', letterSpacing:0, color:'var(--text-3)'}}>{lines.length} baris</span></h4>
         <div className="line-items">
-          <table>
+          <table className="data">
             <thead>
               <tr>
                 <th style={{width:'45%'}}>Nama Barang</th>
@@ -711,7 +711,7 @@ function OpnameModal({ data, onClose, onSave }) {
           <>
             <h4 style={{marginTop:14}}>Hasil Opname <span style={{float:'right', fontWeight:400, fontSize:11.5, textTransform:'none', letterSpacing:0, color:'var(--text-3)'}}>{items.length} dari {data.items} item</span></h4>
             <div className="line-items">
-              <table>
+              <table className="data">
                 <thead>
                   <tr>
                     <th style={{width:'30%'}}>Nama Barang</th>

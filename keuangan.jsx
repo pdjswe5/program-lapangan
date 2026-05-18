@@ -208,6 +208,32 @@ function KeuanganDashboard({ onOpenSub, onNavigate }) {
   );
 }
 
+// ─── Modal Shell ────────────────────────────────────────────────────────────
+
+function AkModalShell({ title, sub, onClose, onSave, children, saveLabel = 'Simpan', wide = false }) {
+  return (
+    <div className="modal-backdrop" onClick={onClose}>
+      <div className="modal" onClick={e => e.stopPropagation()} style={wide ? { maxWidth: 980 } : { maxWidth: 640 }}>
+        <div className="modal-head">
+          <div>
+            <h2>{title}</h2>
+            {sub && <div className="sub">{sub}</div>}
+          </div>
+          <button className="btn btn-icon" onClick={onClose}>{I.x(16)}</button>
+        </div>
+        <div className="modal-body">{children}</div>
+        <div className="modal-foot">
+          <div className="muted" style={{ fontSize: 12.5 }}><kbd>Esc</kbd> untuk batal</div>
+          <div className="right" style={{ display: 'flex', gap: 8 }}>
+            <button className="btn" onClick={onClose}>Batal</button>
+            <button className="btn btn-primary" onClick={onSave}>{I.check()} {saveLabel}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── Generic Transaction Page Builder ───────────────────────────────────────
 
 function TxPage({ title, sub, rows, columns, onAdd, onEdit, totalKey, totalLabel='Total', extraTotals=[] }) {
