@@ -986,3 +986,54 @@ kbd {
   .modnav button, .tab-group-label, .sub-tab { padding: 0 6px; font-size: 11.5px; }
   .topbar-left { gap: 8px; }
 }
+
+/* ===== Thin scrollbars ===== */
+/* Firefox */
+.table-scroll,
+.modal-body,
+.notif-list,
+.burger-menu,
+.line-items {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+/* Chrome / Edge / Safari */
+.table-scroll::-webkit-scrollbar,
+.modal-body::-webkit-scrollbar,
+.notif-list::-webkit-scrollbar,
+.burger-menu::-webkit-scrollbar,
+.line-items::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.table-scroll::-webkit-scrollbar-track,
+.modal-body::-webkit-scrollbar-track,
+.notif-list::-webkit-scrollbar-track,
+.burger-menu::-webkit-scrollbar-track,
+.line-items::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.table-scroll::-webkit-scrollbar-thumb,
+.modal-body::-webkit-scrollbar-thumb,
+.notif-list::-webkit-scrollbar-thumb,
+.burger-menu::-webkit-scrollbar-thumb,
+.line-items::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 999px;
+}
+
+.table-scroll::-webkit-scrollbar-thumb:hover,
+.modal-body::-webkit-scrollbar-thumb:hover,
+.notif-list::-webkit-scrollbar-thumb:hover,
+.burger-menu::-webkit-scrollbar-thumb:hover,
+.line-items::-webkit-scrollbar-thumb:hover {
+  background: var(--text-3);
+}
+
+.table-scroll::-webkit-scrollbar-corner,
+.modal-body::-webkit-scrollbar-corner {
+  background: transparent;
+}

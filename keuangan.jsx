@@ -171,18 +171,23 @@ function KeuanganDashboard({ onOpenSub, onNavigate }) {
       <div className="grid-responsive" style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:16, marginTop:32}}>
         <div className="panel">
           <h3>Saldo Akun</h3>
-          <table className="data" style={{margin:'4px -4px'}}>
-            <thead><tr><th>Akun</th><th>Tipe</th><th className="num">Saldo</th></tr></thead>
-            <tbody>
-              {KAS_BANK_GIRO.slice(0,7).map(a => (
-                <tr key={a.kode}>
-                  <td><span className="cell-link" style={{fontWeight:500}}>{a.nama}</span><div className="muted mono" style={{fontSize:11.5}}>{a.kode}</div></td>
-                  <td><span className="pill" style={{background: a.tipe==='KAS'?'#eef2ff':a.tipe==='BANK'?'#f0fdfa':'#fdf4ff', color:a.tipe==='KAS'?'#4338ca':a.tipe==='BANK'?'#0f766e':'#7c3aed'}}>{a.tipe}</span></td>
-                  <td className="num mono" style={{fontWeight:600}}>{fmtRp(a.saldo)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div style={{overflow:'hidden', margin:'4px -20px -20px', borderRadius:'0 0 8px 8px'}}>
+            <table className="data" style={{minWidth:0, width:'100%'}}>
+              <thead><tr><th>Akun</th><th className="center" style={{width:140}}>Tipe</th><th className="num" style={{width:140}}>Saldo</th></tr></thead>
+              <tbody>
+                {KAS_BANK_GIRO.slice(0,7).map(a => (
+                  <tr key={a.kode}>
+                    <td style={{overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap', maxWidth:0}}>
+                      <span className="cell-link" style={{fontWeight:500}}>{a.nama}</span>
+                      <div className="muted mono" style={{fontSize:11.5}}>{a.kode}</div>
+                    </td>
+                    <td className="center"><span className="pill" style={{background: a.tipe==='KAS'?'#eef2ff':a.tipe==='BANK'?'#f0fdfa':'#fdf4ff', color:a.tipe==='KAS'?'#4338ca':a.tipe==='BANK'?'#0f766e':'#7c3aed'}}>{a.tipe}</span></td>
+                    <td className="num mono" style={{fontWeight:600}}>{fmtRp(a.saldo)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
         <div className="panel">
           <h3>Giro Outstanding — Jatuh Tempo Terdekat</h3>
